@@ -114,6 +114,11 @@ def get_x_first_place_names(query, x=10) -> list:
             break
     return return_list, api_request
 
+def placenames_options(querey):
+    if len(querey) < 4:
+        return []
+    return get_x_first_place_names(querey)[1]
+
 def wrapper_page():
     # st.set_page_config(layout="wide")
 
@@ -132,6 +137,9 @@ def wrapper_page():
         else:
             st.warning("No places found for your query.")
 
+    test = ""
+    options = placenames_options(test)
+    test = st.selectbox("Select a place", options)
 
     data = draw_trip_in_map()
     # st.write(data)
