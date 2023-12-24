@@ -4,6 +4,7 @@ from folium.plugins import Draw
 from streamlit_folium import st_folium
 
 from .utils import polygon_from_point
+import random
 
 # MAP settings
 INPUT_MAP_CENTER = [60.0, 10.0]
@@ -92,7 +93,7 @@ def write_trees(years=dict):
         cols = [col1,col2,col3,col4,col5]
         for col in cols:
             with col:
-                st.image(f"Graphics/SNOW_{years_list[0][1]}.png")
+                st.image(f"Graphics/SNOW_{random.randint(0,3)}.png")
                 st.write(years_list[0][0])
     # graphics = {
     #     0: "SNOW_0"
