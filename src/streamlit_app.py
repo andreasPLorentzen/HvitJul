@@ -129,10 +129,8 @@ def get_place_name(lat,long):
     }
 
     response = requests.get(base_url, params=params)
-    # st.write(response)
-    # st.write(response.json())
+
     if response.status_code == 200:
-        # st.write(response.json())
         try:
             return response.json()["navn"][0]["stedsnavn"][0]["skrivemåte"]
         except:
@@ -177,7 +175,16 @@ def wrapper_page():
         # polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         # st.write(polygon)
         location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
-        st.write(f"Du har valgt: {location_name}")
+        st.header(f"{location_name}")
+    import time
+    with st.status("Henter historiske snøberegninger fra NVE"):
+        time.sleep(1)
+        st.write("2023")
+        time.sleep(1)
+        st.write("2022")
+        time.sleep(1)
+        st.write("2021")
+
 
     write_trees({"ost":1})
 
