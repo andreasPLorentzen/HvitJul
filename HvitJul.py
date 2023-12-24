@@ -103,6 +103,12 @@ def wrapper_page():
 
     data = draw_trip_in_map()
     st.write(data)
+    st.write(data["last_clicked"])
+
+    if data["last_clicked"] is not None:
+        polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 5000)
+        st.write(polygon)
+
 
 
 if __name__ == "__main__":
