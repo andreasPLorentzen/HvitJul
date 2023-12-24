@@ -63,9 +63,17 @@ def draw_trip_in_map():
 
 
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
-    if data["last_clicked"] is not None:
+    # if data["last_clicked"] is not None:
+    if m.get("last_clicked"):
+
         marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
         st.session_state["markers"] = [marker]
+
+
+
+
+
+
 
 
 
