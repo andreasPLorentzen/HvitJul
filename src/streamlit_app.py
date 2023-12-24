@@ -16,6 +16,7 @@ def draw_trip_in_map():
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
     m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
+    f_m = st_folium(m)
 
     # NOT REALLY A GOOD WAY, but all other attempts seems to fail...
 
@@ -64,10 +65,9 @@ def draw_trip_in_map():
 
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
     # # if data["last_clicked"] is not None:
-    # if m.get("last_clicked"):
-    #
-    #     marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
-    #     st.session_state["markers"] = [marker]
+    if f_m.get("last_clicked"):
+        marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
+        st.session_state["markers"] = [marker]
     #
 
 
