@@ -93,8 +93,8 @@ def write_trees(years=dict):
         cols = [col1,col2,col3,col4,col5,col6,col7,col8,col9,col10]
         for col in cols:
             with col:
-                st.image(f"Graphics/SNOW_{random.randint(0,3)}.png")
-                st.write(years_list[0][0])
+                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png")
+                st.caption(years_list[0][0])
     # graphics = {
     #     0: "SNOW_0"
     # }
