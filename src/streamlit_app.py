@@ -97,7 +97,7 @@ def get_place_names(query):
     else:
         return []
 
-def get_x_first_place_names(query, x) -> list:
+def get_x_first_place_names(query, x=10) -> list:
     api_request = get_place_names(query)
     return_list = []
 
@@ -107,7 +107,8 @@ def get_x_first_place_names(query, x) -> list:
     st.write(api_request["navn"])
 
     for index, data in enumerate(api_request["navn"]):
-        return_list.append(data["skrivemåte"])
+        # if data["navneobjekttype"]
+        return_list.append(data["skrivemåte"], data["kommuner"]["kommunenavn"])
 
         if index > x:
             break
