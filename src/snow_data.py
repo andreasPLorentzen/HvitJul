@@ -2,7 +2,7 @@
 from datetime import date
 from dataclasses import dataclass, field, asdict
 
-from snow_level import SnowLevel
+from .snow_level import SnowLevel
 
 @dataclass(order=True)
 class SnowData:
