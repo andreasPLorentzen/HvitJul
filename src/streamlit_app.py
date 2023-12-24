@@ -115,17 +115,20 @@ def get_x_first_place_names(query, x=10) -> (list,list):
     return return_list, api_request
 
 def get_place_name(lat,long):
-    url = f"https://api.kartverket.no/stedsnavn/v1/punkt?nord={lat}&ost={long}&koordsys=4258&radius=500&utkoordsys=4258&treffPerSide=10&side=1"
-    base_url = "https://api.kartverket.no/stedsnavn/v1/navn"
-    # params = {
-    #     "sok": query,
-    #     "fuzzy": "true",
-    #     "utkoordsys": "4258",
-    #     "treffPerSide": "10",
-    #     "side": "1"
-    # }
+    url = f"https://api.kartverket.no/stedsnavn/v1/punkt?"
+    base_url = "https://api.kartverket.no/stedsnavn/v1/punkt"
+    params = {
+        "nord": lat,
+        "ost": long,
+        "kordsys": 4258,
+        "radius": 500,
+        "fuzzy": "true",
+        "utkoordsys": "4258",
+        "treffPerSide": "10",
+        "side": "1"
+    }
 
-    response = requests.get(base_url)
+    response = requests.get(base_url, params=params)
     st.write(response)
     st.write(response.json())
     if response.status_code == 200:
