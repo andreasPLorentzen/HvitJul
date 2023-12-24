@@ -54,7 +54,7 @@ def draw_trip_in_map():
             'edit': True  # Allow editing shapes
         },
     )
-
+    draw.add_to(m)
 
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH)
 
