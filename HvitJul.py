@@ -12,7 +12,7 @@ INPUT_MAP_WIDTH = 1000
 INPUT_MAP_HEIGHT = 600
 INPUT_MAP_ZOOM = 8
 
-def polygon_from_point(lat, long, radius, sides=6):
+def polygon_from_point(lat:float, long:float, radius:float, sides:int=6) -> str:
     """
     Generate a WKT polygon for a circle, hexagon, or heptagon.
 
