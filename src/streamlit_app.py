@@ -32,29 +32,29 @@ def draw_trip_in_map():
             # tilematrix='EPSG:3857'  # Change to the appropriate tile matrix if necessary
         ).add_to(m)
 
-    draw = Draw(
-        export=True,
-        draw_options={
-            'polyline': False,
-            'polygon': False,  # Disables drawing Polygons
-            'circle': False,  # Disables drawing Circles
-            'rectangle': False,  # Disables drawing Rectangles
-            'marker':  {'shapeOptions': {
-                    'color': '#b81c21',  # Line color
-                    'weight': 4,  # Line weight
-                    'opacity': 1.0,  # Line opacity (0.0 to 1.0)
-                },}
-            ,  # Disables placing Markers
-            'circlemarker': False,  # Disables placing Circle Markers
-        },
-        edit_options={
-            'featureGroup': None,
-            # You must define a FeatureGroup for editing (or it will create an empty one for use)
-            'remove': False,  # Allow removing shapes
-            'edit': True  # Allow editing shapes
-        },
-    )
-    draw.add_to(m)
+    # draw = Draw(
+    #     export=True,
+    #     draw_options={
+    #         'polyline': False,
+    #         'polygon': False,  # Disables drawing Polygons
+    #         'circle': False,  # Disables drawing Circles
+    #         'rectangle': False,  # Disables drawing Rectangles
+    #         'marker':  {'shapeOptions': {
+    #                 'color': '#b81c21',  # Line color
+    #                 'weight': 4,  # Line weight
+    #                 'opacity': 1.0,  # Line opacity (0.0 to 1.0)
+    #             },}
+    #         ,  # Disables placing Markers
+    #         'circlemarker': False,  # Disables placing Circle Markers
+    #     },
+    #     edit_options={
+    #         'featureGroup': None,
+    #         # You must define a FeatureGroup for editing (or it will create an empty one for use)
+    #         'remove': False,  # Allow removing shapes
+    #         'edit': True  # Allow editing shapes
+    #     },
+    # )
+    # draw.add_to(m)
     fg = folium.FeatureGroup(name="Markers")
     for marker in st.session_state["markers"]:
         fg.add_child(marker)
@@ -64,7 +64,7 @@ def draw_trip_in_map():
 
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg,)
     if data["last_clicked"] is not None:
-        marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
+        marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
         st.session_state["markers"].append(marker)
 
 
