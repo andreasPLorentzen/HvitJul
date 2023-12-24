@@ -140,6 +140,7 @@ def wrapper_page():
     test = ""
     options = placenames_options(test)
     test = st.selectbox("Select a place", options)
+    st.write(test)
 
     data = draw_trip_in_map()
     # st.write(data)
