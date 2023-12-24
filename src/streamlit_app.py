@@ -94,7 +94,6 @@ def write_trees(years=dict):
         for col in cols:
             with col:
                 st.image(f"Graphics/SNOW_{random.randint(0,2)}.png")
-                st.caption(years_list[0][0])
                 st.markdown(
                     f"<div style='text-align: center;'>{years_list[0][0]}</div>",
                     unsafe_allow_html=True
