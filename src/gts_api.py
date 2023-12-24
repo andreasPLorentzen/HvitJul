@@ -3,8 +3,8 @@ import json
 from statistics import mean 
 from datetime import date
 
-from utils import convert_coordinates
-from snow_data import SnowData
+from .utils import convert_coordinates
+from .snow_data import SnowData
 
 GTS_RELEVANT_INFORMATION = {
     'tm':'temperature',
