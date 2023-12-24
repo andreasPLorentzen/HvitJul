@@ -4,7 +4,7 @@ from folium.plugins import Draw
 from streamlit_folium import st_folium
 
 from .utils import polygon_from_point
-import random
+import random, requests
 
 # MAP settings
 INPUT_MAP_CENTER = [60.0, 10.0]
@@ -16,7 +16,7 @@ def draw_trip_in_map():
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
     m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
-    f_m = st_folium(m)
+
 
     # NOT REALLY A GOOD WAY, but all other attempts seems to fail...
 
@@ -63,9 +63,11 @@ def draw_trip_in_map():
     #     folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
 
 
-    data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
+    # data = st_folium(f_m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
+    data = st_folium(m, width=725)
+    # data =  st_folium(m)
     # # if data["last_clicked"] is not None:
-    if f_m.get("last_clicked"):
+    if data.get("last_clicked"):
         marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
         st.session_state["markers"] = [marker]
     #
@@ -79,8 +81,57 @@ def draw_trip_in_map():
 
     return data
 
+def get_place_names(query):
+    base_url = "https://api.kartverket.no/stedsnavn/v1/navn"
+    params = {
+        "sok": query,
+        "fuzzy": "true",
+        "utkoordsys": "4258",
+        "treffPerSide": "10",
+        "side": "1"
+    }
+
+    response = requests.get(base_url, params=params)
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return []
+
+def get_x_first_place_names(query, x=10) -> list:
+    api_request = get_place_names(query)
+    return_list = []
+
+    if api_request == []:
+        return []
+
+    st.write(api_request["navn"])
+
+    for index, data in enumerate(api_request["navn"]):
+        # if data["navneobjekttype"]
+        return_list.append(data["skrivemåte"] + ", " +  data["kommuner"]["kommunenavn"])
+
+        if index > x:
+            break
+    return return_list, api_request
+
 def wrapper_page():
     # st.set_page_config(layout="wide")
+
+    st.title("Place Name Autocomplete")
+
+    place_query = st.text_input("Enter a place name", "")
+    if place_query:
+        # place_names = get_place_names(place_query)
+        # st.write(place_names)
+        first_10_place_names, place_names = get_x_first_place_names(place_query, 10)
+        st.write(first_10_place_names)
+        if 'navn' in place_names:
+            # options = [place['navn'] for place in place_names['navn']]
+            options = first_10_place_names
+            st.selectbox("Select a place", options)
+        else:
+            st.warning("No places found for your query.")
+
 
     data = draw_trip_in_map()
     # st.write(data)
