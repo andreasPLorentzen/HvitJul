@@ -32,28 +32,28 @@ def draw_trip_in_map():
             # tilematrix='EPSG:3857'  # Change to the appropriate tile matrix if necessary
         ).add_to(m)
 
-        draw = Draw(
-            export=True,
-            draw_options={
-                'polyline': False,
-                'polygon': False,  # Disables drawing Polygons
-                'circle': False,  # Disables drawing Circles
-                'rectangle': False,  # Disables drawing Rectangles
-                'marker':  {'shapeOptions': {
-                        'color': '#b81c21',  # Line color
-                        'weight': 4,  # Line weight
-                        'opacity': 1.0,  # Line opacity (0.0 to 1.0)
-                    },}
-                ,  # Disables placing Markers
-                'circlemarker': False,  # Disables placing Circle Markers
-            },
-            edit_options={
-                'featureGroup': None,
-                # You must define a FeatureGroup for editing (or it will create an empty one for use)
-                'remove': False,  # Allow removing shapes
-                'edit': True  # Allow editing shapes
-            },
-        )
+    draw = Draw(
+        export=True,
+        draw_options={
+            'polyline': False,
+            'polygon': False,  # Disables drawing Polygons
+            'circle': False,  # Disables drawing Circles
+            'rectangle': False,  # Disables drawing Rectangles
+            'marker':  {'shapeOptions': {
+                    'color': '#b81c21',  # Line color
+                    'weight': 4,  # Line weight
+                    'opacity': 1.0,  # Line opacity (0.0 to 1.0)
+                },}
+            ,  # Disables placing Markers
+            'circlemarker': False,  # Disables placing Circle Markers
+        },
+        edit_options={
+            'featureGroup': None,
+            # You must define a FeatureGroup for editing (or it will create an empty one for use)
+            'remove': False,  # Allow removing shapes
+            'edit': True  # Allow editing shapes
+        },
+    )
 
 
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH)
@@ -93,9 +93,9 @@ def write_trees(years=dict):
         cols = [col1,col2,col3,col4,col5,col6,col7,col8,col9,col10]
         for col in cols:
             with col:
-                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png")
+                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png",)
                 st.markdown(
-                    f"<div style='text-align: center;'>{years_list[0][0]}</div>",
+                    f"<div style='text-align: center; padding-top: 0px;'>{years_list[0][0]}</div>",
                     unsafe_allow_html=True
                 )
     # graphics = {
