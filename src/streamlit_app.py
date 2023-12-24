@@ -117,7 +117,7 @@ def get_x_first_place_names(query, x=10) -> list:
 def placenames_options(querey):
     if len(querey) < 4:
         return [""]
-    return get_x_first_place_names(querey)[1]
+    return get_x_first_place_names(querey)[0]
 
 def wrapper_page():
     # st.set_page_config(layout="wide")
@@ -139,7 +139,7 @@ def wrapper_page():
 
     test = "Tynset"
     options = placenames_options(test)
-    test = st.selectbox("Søk på stedsnavn", options)
+    test = st.selectbox("Søk på stedsnavn", placenames_options(test))
     st.write(test)
 
     data = draw_trip_in_map()
