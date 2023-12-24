@@ -124,16 +124,16 @@ def get_place_name(lat,long):
         "radius": 500,
         "fuzzy": "true",
         "utkoordsys": "4258",
-        "treffPerSide": "10",
+        "treffPerSide": "1",
         "side": "1"
     }
 
     response = requests.get(base_url, params=params)
-    st.write(response)
+    # st.write(response)
     st.write(response.json())
     if response.status_code == 200:
         st.write(response.json())
-        return response.json()
+        return response.json()["navn"][0]["stedsnavn"][0]["skrivemåte"]
     else:
         return []
 
@@ -174,7 +174,7 @@ def wrapper_page():
         # polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         # st.write(polygon)
         location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
-
+        st.write(f"Du har valgt: {location_name}")
 
     write_trees({"ost":1})
 
