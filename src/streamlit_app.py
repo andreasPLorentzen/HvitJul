@@ -137,7 +137,7 @@ def wrapper_page():
         else:
             st.warning("No places found for your query.")
 
-    test = ""
+    test = "Tynset"
     options = placenames_options(test)
     test = st.selectbox("Select a place", options)
     st.write(test)
