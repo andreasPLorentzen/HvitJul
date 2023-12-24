@@ -39,13 +39,7 @@ def polygon_from_point(lat:float, long:float, radius:float, sides:int=6) -> str:
 
 
 import warnings
-
-# Some code that doesn't cause warnings
-
-with warnings.catch_warnings():
-    warnings.simplefilter("ignore", FutureWarning)
-
-
+warnings.simplefilter(action='ignore') # Needed as the proj give a futurewarning
 def convert_coordinates(lat:float, lon:float, epsg_code:int=32633) -> (float, float):
     """
     Convert latitude and longitude to UTM or another coordinate system using an EPSG code.
