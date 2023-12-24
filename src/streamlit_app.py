@@ -56,7 +56,10 @@ def draw_trip_in_map():
     )
     draw.add_to(m)
 
+
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH)
+    if data["last_clicked"] is not None:
+        folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
 
 
     return data
