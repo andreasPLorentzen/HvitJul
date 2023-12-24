@@ -13,24 +13,22 @@ INPUT_MAP_HEIGHT = 600
 INPUT_MAP_ZOOM = 8
 
 def draw_trip_in_map():
-    map_center = INPUT_MAP_CENTER
-
-    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, max_zoom=17, min_lat=10, min_lon=3, max_lon=35, auto_save=False, export=False)
+    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
 
     # NOT REALLY A GOOD WAY, but all other attempts seems to fail...
 
-    for tilematrix_level in range(4, 17):
-        tiles = f"https://cache.kartverket.no/topo/v1/wmts/1.0.0/?layer=topo&style=default&tilematrixset=googlemaps&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix={tilematrix_level}" + "&TileCol={x}&TileRow={y}"
-
-        wmts_layer = folium.TileLayer(
-            tiles=tiles,
-            attr="Kartverket",
-            name="WMTS Layer",
-            overlay=True,
-            control=True,
-            # tms=True,  # If using TMS tiling set this to True
-            # tilematrix='EPSG:3857'  # Change to the appropriate tile matrix if necessary
-        ).add_to(m)
+    # for tilematrix_level in range(4, 17):
+    #     tiles = f"https://cache.kartverket.no/topo/v1/wmts/1.0.0/?layer=topo&style=default&tilematrixset=googlemaps&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix={tilematrix_level}" + "&TileCol={x}&TileRow={y}"
+    #
+    #     wmts_layer = folium.TileLayer(
+    #         tiles=tiles,
+    #         attr="Kartverket",
+    #         name="WMTS Layer",
+    #         overlay=True,
+    #         control=True,
+    #         # tms=True,  # If using TMS tiling set this to True
+    #         # tilematrix='EPSG:3857'  # Change to the appropriate tile matrix if necessary
+    #     ).add_to(m)
 
     # draw = Draw(
     #     export=True,
@@ -62,7 +60,7 @@ def draw_trip_in_map():
     #     folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
 
 
-    data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg,)
+    data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
     if data["last_clicked"] is not None:
         marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
         st.session_state["markers"].append(marker)
