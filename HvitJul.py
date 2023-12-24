@@ -31,7 +31,7 @@ def polygon_from_point(lat, long, radius, sides=6):
         angle_rad = math.radians(angle_deg)
         lat_new = lat + (radius / 111.32) * math.cos(angle_rad)
         long_new = long + (radius / (111.32 * math.cos(math.radians(lat)))) * math.sin(angle_rad)
-        return lat_new, long_new
+        return round(lat_new,3), round(long_new,3)
 
     # Generate polygon points
     polygon_points = []
@@ -106,7 +106,7 @@ def wrapper_page():
     st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
-        polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 5000)
+        polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         st.write(polygon)
 
 
