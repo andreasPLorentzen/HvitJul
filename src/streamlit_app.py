@@ -179,8 +179,8 @@ def wrapper_page():
         lon = data["last_clicked"]["lng"]
         location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
         st.header(f"{location_name}")
-        st.write(GridTimeSeriesAPI(lat, lon, 2023))
-        st.write(GridTimeSeriesAPI(lat, lon, 2022))
+        st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2023))
+        st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
     import time
 
 
