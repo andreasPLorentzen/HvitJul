@@ -55,7 +55,7 @@ def draw_trip_in_map():
             'edit': True  # Allow editing shapes
         },
     )
-    draw.add_to(f_m)
+    draw.add_to(m)
     fg = folium.FeatureGroup(name="Markers")
     for marker in st.session_state["markers"]:
         fg.add_child(marker)
@@ -64,7 +64,8 @@ def draw_trip_in_map():
 
 
     # data = st_folium(f_m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
-    data =  st_folium(m)
+    data = st_folium(m, width=725)
+    # data =  st_folium(m)
     # # if data["last_clicked"] is not None:
     if data.get("last_clicked"):
         marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
