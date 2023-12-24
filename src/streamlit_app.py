@@ -105,7 +105,8 @@ def get_x_first_place_names(query, x) -> list:
         return []
 
     st.write(api_request["navn"])
-    for index,data in api_request["navn"].items():
+
+    for index, data in enumerate(api_request["navn"]):
         return_list.append(data["skrivemåte"])
 
         if index > x:
