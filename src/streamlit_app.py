@@ -97,6 +97,17 @@ def get_place_names(query):
     else:
         return []
 
+def get_x_first_place_names(query, x) -> list:
+    api_request = get_place_names(query)
+    return_list = []
+    if api_request == []:
+        return []
+    for index,data in api_request["navn"].items():
+        return_list.append(data["skrivemåte"])
+
+        if index > x:
+            return return_list, api_request
+
 def wrapper_page():
     # st.set_page_config(layout="wide")
 
@@ -104,10 +115,13 @@ def wrapper_page():
 
     place_query = st.text_input("Enter a place name", "")
     if place_query:
-        place_names = get_place_names(place_query)
-        st.write(place_names)
+        # place_names = get_place_names(place_query)
+        # st.write(place_names)
+        first_10_place_names, place_names = get_x_first_place_names(place_query)
+        st.write(first_10_place_names)
         if 'navn' in place_names:
-            options = [place['navn'] for place in place_names['navn']]
+            # options = [place['navn'] for place in place_names['navn']]
+            options = first_10_place_names
             st.selectbox("Select a place", options)
         else:
             st.warning("No places found for your query.")
