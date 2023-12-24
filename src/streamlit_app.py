@@ -168,7 +168,7 @@ def wrapper_page():
     if data["last_clicked"] is not None:
         # polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         # st.write(polygon)
-        location_name =
+        location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
 
 
     write_trees({"ost":1})
