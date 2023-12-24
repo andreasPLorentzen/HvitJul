@@ -105,6 +105,7 @@ def wrapper_page():
     place_query = st.text_input("Enter a place name", "")
     if place_query:
         place_names = get_place_names(place_query)
+        st.write(place_names)
         if 'navn' in place_names:
             options = [place['navn'] for place in place_names['navn']]
             st.selectbox("Select a place", options)
