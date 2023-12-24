@@ -120,7 +120,7 @@ def get_place_name(lat,long):
     params = {
         "nord": lat,
         "ost": long,
-        "kordsys": 4258,
+        "koordsys": 4258,
         "radius": 500,
         "fuzzy": "true",
         "utkoordsys": "4258",
