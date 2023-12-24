@@ -99,6 +99,10 @@ def draw_trip_in_map():
     return data
 
 def wrapper_page():
+    # st.set_page_config(layout="wide")
+
+    data = draw_trip_in_map()
+    st.write(data)
 
 
 if __name__ == "__main__":
