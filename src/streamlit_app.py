@@ -71,6 +71,9 @@ def wrapper_page():
         polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         st.write(polygon)
 
+
+    write_trees({"ost":1})
+
 def write_trees(years=dict):
     years = {
         2024: 0,
