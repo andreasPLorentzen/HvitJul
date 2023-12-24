@@ -2,6 +2,7 @@ import streamlit as st
 import folium
 from folium.plugins import Draw
 from streamlit_folium import st_folium
+from src.gts_api import GridTimeSeriesAPI
 
 from .utils import polygon_from_point
 import random, requests
@@ -174,9 +175,16 @@ def wrapper_page():
     if data["last_clicked"] is not None:
         # polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         # st.write(polygon)
+        lat = data["last_clicked"]["lat"]
+        lon = data["last_clicked"]["lng"]
         location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
         st.header(f"{location_name}")
+        st.write(GridTimeSeriesAPI(lat, lon, 2023))
+        st.write(GridTimeSeriesAPI(lat, lon, 2022))
     import time
+
+
+
     with st.status("Henter historiske snøberegninger fra NVE"):
         time.sleep(1)
         st.write("2023")
