@@ -1,9 +1,9 @@
 streamlit
 pandas
+pyproj
 requests
 matplotlib
 numpy
 folium
 streamlit_folium
 requests
-pyproj
