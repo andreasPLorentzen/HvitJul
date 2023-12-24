@@ -3,7 +3,7 @@ import folium
 from folium.plugins import Draw
 from streamlit_folium import st_folium
 
-from utils import polygon_from_point
+from src.utils import polygon_from_point
 
 # MAP settings
 INPUT_MAP_CENTER = [60.0, 10.0]
