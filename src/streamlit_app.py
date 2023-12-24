@@ -139,7 +139,7 @@ def wrapper_page():
 
     test = "Tynset"
     options = placenames_options(test)
-    test = st.selectbox("Select a place", options)
+    test = st.selectbox("Søk på stedsnavn", options)
     st.write(test)
 
     data = draw_trip_in_map()
