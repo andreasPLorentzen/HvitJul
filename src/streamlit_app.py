@@ -108,7 +108,7 @@ def get_x_first_place_names(query, x=10) -> list:
 
     for index, data in enumerate(api_request["navn"]):
         # if data["navneobjekttype"]
-        return_list.append(str(data["skrivemåte"]) + ", " + str(data["kommuner"]["kommunenavn"]))
+        return_list.append(str(data["skrivemåte"]) + ", " + str(data["kommuner"][0]["kommunenavn"]))
 
         if index > x:
             break
