@@ -130,7 +130,7 @@ def get_place_name(lat,long):
 
     response = requests.get(base_url, params=params)
     # st.write(response)
-    st.write(response.json())
+    # st.write(response.json())
     if response.status_code == 200:
         # st.write(response.json())
         try:
