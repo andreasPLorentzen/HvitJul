@@ -1,5 +1,6 @@
 
 import math
+import pyproj
 def polygon_from_point(lat:float, long:float, radius:float, sides:int=6) -> str:
     """
     Generate a WKT polygon for a circle, hexagon, or heptagon.
@@ -35,3 +36,33 @@ def polygon_from_point(lat:float, long:float, radius:float, sides:int=6) -> str:
     wkt_polygon = "POLYGON((" + ",".join([f"{point[1]} {point[0]}" for point in polygon_points]) + "))"
 
     return wkt_polygon
+
+
+
+
+
+def convert_coordinates(lat, lon, epsg_code=32633):
+    """
+    Convert latitude and longitude to UTM or another coordinate system using an EPSG code.
+
+    :param lat: Latitude
+    :param lon: Longitude
+    :param epsg_code: EPSG code for the target coordinate system
+    :return: UTM or target coordinate system coordinates
+
+    epsg_code_utm_33N = 32633 #https://epsg.io/32633
+    """
+    # Define the projection for WGS 84 (latitude and longitude)
+    wgs84 = pyproj.Proj(init='epsg:4326')
+
+    # Define the projection for the target coordinate system
+    target_proj = pyproj.Proj(init=f'epsg:{epsg_code}')
+
+    # Convert latitude and longitude to the target coordinate system
+    x, y = pyproj.transform(wgs84, target_proj, lon, lat)
+
+    return x, y
+
+
+if __name__ == "__main__":
+    print(convert_coordinates(59.9,10.67))
