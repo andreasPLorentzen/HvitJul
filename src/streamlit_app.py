@@ -106,7 +106,8 @@ def get_x_first_place_names(query, x) -> list:
         return_list.append(data["skrivemåte"])
 
         if index > x:
-            return return_list, api_request
+            break
+    return return_list, api_request
 
 def wrapper_page():
     # st.set_page_config(layout="wide")
@@ -117,7 +118,7 @@ def wrapper_page():
     if place_query:
         # place_names = get_place_names(place_query)
         # st.write(place_names)
-        first_10_place_names, place_names = get_x_first_place_names(place_query)
+        first_10_place_names, place_names = get_x_first_place_names(place_query, 10)
         st.write(first_10_place_names)
         if 'navn' in place_names:
             # options = [place['navn'] for place in place_names['navn']]
