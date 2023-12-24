@@ -71,6 +71,31 @@ def wrapper_page():
         polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
         st.write(polygon)
 
+def write_trees(years=dict):
+    years = {
+        2024: 0,
+        2023: 2,
+        2022: 1,
+        2021: 0,
+        2020: 0,
+        2019: 0,
+    }
+    years_list = []
+    for year, category in years.items():
+        years_list.append((year, category))
+
+    for row in range(0,3):
+        col1,col2,col3,col4,col5 = st.columns(5)
+        cols = [col1,col2,col3,col4,col5]
+        for col in cols:
+            with col:
+                st.image(f"Graphics/SNOW_{years_list[0][1]}.png")
+                st.write(years_list[0][0])
+    # graphics = {
+    #     0: "SNOW_0"
+    # }
+
+
 
 
 if __name__ == "__main__":
