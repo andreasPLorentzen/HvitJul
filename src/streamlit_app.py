@@ -116,7 +116,7 @@ def get_x_first_place_names(query, x=10) -> list:
 
 def placenames_options(querey):
     if len(querey) < 4:
-        return []
+        return [""]
     return get_x_first_place_names(querey)[1]
 
 def wrapper_page():
