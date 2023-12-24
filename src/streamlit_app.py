@@ -100,6 +100,7 @@ def get_place_names(query):
 def get_x_first_place_names(query, x) -> list:
     api_request = get_place_names(query)
     return_list = []
+    st.write(api_request)
     if api_request == []:
         return []
     for index,data in api_request["navn"].items():
