@@ -56,10 +56,14 @@ def draw_trip_in_map():
     )
     draw.add_to(m)
 
+    fg = folium.FeatureGroup(name="Markers")
+    # if data["last_clicked"] is not None:
+    #     folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
 
-    data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH)
+
+    data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg,)
     if data["last_clicked"] is not None:
-        folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
+        fg.add_child(folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m))
 
 
     return data
