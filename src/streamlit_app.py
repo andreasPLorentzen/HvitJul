@@ -91,13 +91,15 @@ def write_trees(years=dict):
     for row in range(0,3):
         col1,col2,col3,col4,col5,col6,col7,col8,col9,col10 = st.columns(10,gap="small")
         cols = [col1,col2,col3,col4,col5,col6,col7,col8,col9,col10]
+        i = 2023
         for col in cols:
             with col:
-                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png",)
+                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png", caption=i)
                 st.markdown(
                     f"<div style='text-align: center; padding-top: 0px;'>{years_list[0][0]}</div>",
                     unsafe_allow_html=True
                 )
+            i -= 1
     # graphics = {
     #     0: "SNOW_0"
     # }
