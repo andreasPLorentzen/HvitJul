@@ -133,9 +133,12 @@ def get_place_name(lat,long):
     st.write(response.json())
     if response.status_code == 200:
         # st.write(response.json())
-        return response.json()["navn"][0]["stedsnavn"][0]["skrivemåte"]
+        try:
+            return response.json()["navn"][0]["stedsnavn"][0]["skrivemåte"]
+        except:
+            return "Stedsnavn ikke funnet."
     else:
-        return []
+        return "Ikke noe sted valgt."
 
 
 def placenames_options(querey):
