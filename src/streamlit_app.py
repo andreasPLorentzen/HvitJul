@@ -75,7 +75,7 @@ def wrapper_page():
     # st.set_page_config(layout="wide")
 
     data = draw_trip_in_map()
-    st.write(data)
+    # st.write(data)
     st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
