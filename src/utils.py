@@ -38,10 +38,15 @@ def polygon_from_point(lat:float, long:float, radius:float, sides:int=6) -> str:
     return wkt_polygon
 
 
+import warnings
+
+# Some code that doesn't cause warnings
+
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore", FutureWarning)
 
 
-
-def convert_coordinates(lat, lon, epsg_code=32633):
+def convert_coordinates(lat:float, lon:float, epsg_code:int=32633) -> (float, float):
     """
     Convert latitude and longitude to UTM or another coordinate system using an EPSG code.
 
