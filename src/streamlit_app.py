@@ -277,8 +277,7 @@ def main_page():
     if lat is not None:
         earliest_year = datetime.date(year=1973,month=1,day=1).year
         st.write(datetime.date(year=this_year - 14,month=1,day=1))
-        earliest = st.date_input("Hvor langt bak i tid vil du se?",format="YYYY",min_value=datetime.date(year=1973,month=1,day=1),value=datetime.date(year=this_year - 14,month=1,day=1))
-        # earliest_year = earliest_year.year
+        earliest_year = st.slider("Hvor langt tilbake i tid vil du se?", 1973,max_value=this_year-1)
         st.write(earliest)
         with st.status("Henter historiske snøberegninger fra NVE"):
             marker = folium.Marker([lat, lon])
