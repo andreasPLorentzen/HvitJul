@@ -91,6 +91,66 @@ def create_svg_grid_str(svg_strings, images_per_row=10):
     # Convert the output SVG element tree back to a string and return it
     return tostring(output_svg, encoding='unicode')
 
+def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_per_row=10):
+    # Assume the viewBox dimensions represent svg_width and svg_height (fallback default size)
+    svg_width, svg_height = 100, 150
+
+    # Try to extract width and height from the first SVG string's viewBox for later use
+    first_svg = fromstring(svg_strings[0])
+    viewbox = first_svg.get('viewBox')
+    if viewbox:
+        _, _, svg_width, svg_height = map(float, viewbox.split())
+
+    # Parse additional SVG elements for the top and info areas
+    top_svg = fromstring(top_svg_string)
+    info_svg = fromstring(info_svg_string)
+
+    # Calculate new canvas width and height based on image per row and number of rows needed
+    output_width = svg_width * images_per_row
+    rows_needed = ((len(svg_strings) + images_per_row - 1) // images_per_row)
+    output_height = svg_height * rows_needed
+
+    # Create the root <svg> element for the output SVG
+    output_svg = Element("svg", xmlns="http://www.w3.org/2000/svg", version="1.1")
+    output_svg.set("width", str(output_width))
+    output_svg.set("height", str(output_height))
+
+    # Set top_svg position at the top center of the grid
+    top_svg.set('x', str(output_width / 2 - float(top_svg.get('width', '100')) / 2))
+    top_svg.set('y', '0')  # Assuming top SVG's height is less than `svg_height`
+
+    # Set info_svg position at the bottom right of the grid
+    info_svg.set('x', str(output_width - float(info_svg.get('width', '100'))))
+    info_svg.set('y', str(output_height - float(info_svg.get('height', '50'))))
+
+    # Append the top SVG element
+    output_svg.append(top_svg)
+
+    # Iterate over SVG strings, update the year text and calculate their positions
+    # Include them starting from the second row to leave space for the top SVG at first row
+    for idx, svg_string in enumerate(svg_strings):
+        svg = fromstring(svg_string)
+
+        # Update the year text
+        for text in svg.iter():
+            if text.text and 'YEAR_TEXT' in text.text:
+                text.text = text.text.replace('YEAR_TEXT', '2023')
+
+        # Calculate new x, y positions based on the grid position
+        x = (idx % images_per_row) * svg_width
+        y = (idx // images_per_row) * svg_height + float(top_svg.get('height', '50'))  # Offset by top_svg's height
+        svg.set('x', str(x))
+        svg.set('y', str(y))
+
+        # Append updated SVG directly to the root SVG container
+        output_svg.append(svg)
+
+    # Append the info SVG element last so it renders on top of other elements (if there are overlapping issues)
+    output_svg.append(info_svg)
+
+    # Convert output SVG element tree back to a string and return it
+    return tostring(output_svg, encoding='unicode')
+
 def create_svg_grid_test():
     list_of_strings = [
         moderate,
@@ -105,7 +165,9 @@ def create_svg_grid_test():
     original_svg_string = '<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg"><!-- SVG content here --></svg>'
     title = "My SVG Title"
     # return_string = add_title_to_svg(svg_string=return_string,title_text=title)
-    return_string = add_marginalia_to_svg(return_string,"Oslo", "wooop", "Andreas shøjæ")
+    # return_string = add_marginalia_to_svg(return_string,"Oslo", "wooop", "Andreas shøjæ")
+
+    return_string = create_svg_grid_str_v2(list_of_strings, images_per_row=4,top_svg_string=top, info_svg_string=info)
 
     return return_string
 
@@ -267,6 +329,20 @@ def add_marginalia_to_svg(svg_string, title, subtitle, info_text):
     # Return updated SVG as a string
     return tostring(svg, encoding='unicode')
 
+top = '''
+<svg viewBox="0 0 200.337 81.65" width="200.337" height="81.65" xmlns="http://www.w3.org/2000/svg">
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; white-space: pre;" x="79.124" y="37.224" transform="matrix(1.248075008392334, 0, 0, 1.375, -0.27718898653983715, -5.751928806304932)">TITLE_TEXT</text>
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6364px; font-style: italic; text-anchor: middle; white-space: pre;" transform="matrix(1.248075008392334, 0, 0, 1.375, -2.8451161384582484, 19.80634307861328)" x="79.124" y="37.224">SUBTITLE_TEXT</text>
+</svg>
+'''
+
+info = '''
+<svg viewBox="0 0 132.155 16.835" width="132.155" height="16.835" xmlns="http://www.w3.org/2000/svg">
+  <text style="fill: rgb(183, 183, 183); font-family: Arial, sans-serif; font-size: 9px; font-style: italic; text-anchor: end; white-space: pre;" x="125" y="11.363" transform="matrix(1, 0, 0, 1, 3.552713678800501e-15, 0)">INFO_TEXT</text>
+</svg>
+'''
+
+
 moderate = '''
 <svg viewBox="0.399 2.635 100.195 124.401" width="100.195" height="124.401" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
   <defs>
@@ -340,6 +416,7 @@ moderate = '''
   </path>
 </svg>
 '''
+
 if __name__ == "__main__":
 
     print(create_svg_grid_test())
