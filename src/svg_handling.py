@@ -108,7 +108,7 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     # Calculate new canvas width and height based on image per row and number of rows needed
     output_width = svg_width * images_per_row
     rows_needed = ((len(svg_strings) + images_per_row - 1) // images_per_row)
-    output_height = svg_height * rows_needed
+    output_height = svg_height * rows_needed + 200
 
     # Create the root <svg> element for the output SVG
     output_svg = Element("svg", xmlns="http://www.w3.org/2000/svg", version="1.1")
