@@ -135,7 +135,7 @@ def get_place_name(lat,long):
         try:
             data = response.json()["navn"][0]
             st.write(data)
-            return (data["stedsnavn"][0]["skrivemåte"], data["kommuner"][0]["kommunenavn"])
+            return (data["stedsnavn"][0]["skrivemåte"], data["meterFraPunkt"])
         except:
             return ("Stedsnavn ikke funnet.", "")
     else:
@@ -146,7 +146,7 @@ def get_place_name_as_markdown(lat,long):
     navn,kommune = get_place_name(lat,long)
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
-         f'<p style="font-size: 1.5em; font-weight: italic; margin-left: 10px; display: inline;">{kommune}</p>'
+         f'<p style="font-size: 1.5em; font-weight: italic; margin-left: 10px; display: inline;">{kommune} meter fra valgt punkt</p>'
 
     return html
 
