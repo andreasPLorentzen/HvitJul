@@ -22,6 +22,7 @@ class SnowData:
     qsw: float = field(default=0) # Snøsmelting siste døgn i cm
 
     def snow_level(self) -> bool:
+        if not self.success: return SnowLevel.ERROR
         if self.sd > 80: return SnowLevel.SEVERE
         if self.sd > 40: return SnowLevel.HEAVY
         if self.sd > 7: return SnowLevel.MODERATE
