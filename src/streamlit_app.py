@@ -238,12 +238,13 @@ def wrapper_page():
     m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
     fg = folium.FeatureGroup(name="Markers")
 
+    data = st_folium(m, height=300, width=750)
     # adding markers
     for marker in st.session_state["markers"]:
         fg.add_child(marker)
 
     # drawing map
-    data = st_folium(m, height=300, width=750)
+
 
     # if data.get("last_clicked"):
     #     marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
