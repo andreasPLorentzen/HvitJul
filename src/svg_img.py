@@ -153,8 +153,8 @@ class image_generation:
         background_rect = SubElement(output_svg, "rect", {
             "x": str(border_width ),
             "y": str(border_width),
-            "width": str(output_width - border_width),
-            "height": str(output_height + top_height),
+            "width": str(output_width - border_width*2),
+            "height": str(output_height + top_height-border_width*2),
             "fill": "#F0F5FC",
             "stroke": "#D1EBE1",
             "stroke-width": str(border_width)
