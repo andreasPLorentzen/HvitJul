@@ -106,7 +106,7 @@ def create_svg_grid_test():
     return return_string
 
 
-def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_width="2"):
+def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_width=2):
     # Parse the SVG string
     svg_tree = fromstring(svg_string)
     width = svg_tree.get("width", "200")  # default fallback width
