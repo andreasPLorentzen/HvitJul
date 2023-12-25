@@ -27,7 +27,7 @@ class image_generation:
             # st.write("SNOW_LEVEL_" + condition)
             # st.write("SNOW_LEVEL_" + condition in self.images.keys())
             # st.write(self.images["SNOW_LEVEL_" + condition])
-            tree_image = self.images["SNOW_LEVEL_" + condition]
+            tree_image = f'{self.images["SNOW_LEVEL_" + condition]}'
             tree_image.replace("YEAR_TEXT", str(year))
             tree_image.replace("SUB_TEXT", str(depth))
             svg_list.append(tree_image)
@@ -35,9 +35,11 @@ class image_generation:
 
 
         # alter top and info
-        top = self._alter_text_in_image(self.images["TOP"],title=title, sub_title=sub_title)
-        info = self._alter_text_in_image(self.images["INFO"], info="Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen")
-
+        top = self.images["TOP"]
+        top.replace("TITLE_TEXT", title)
+        top.replace("SUB_TEXT", sub_title)
+        info = self.images["INFO"]
+        info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen")
         # generate image:
         self.result_image = self._create_svg_grid_str(svg_list,top,info,images_per_row=5)
 
