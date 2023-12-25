@@ -176,7 +176,6 @@ def get_place_name(lat,long) -> (str, str, (float, float)):
                 if name_obj["meterFraPunkt"] < closest_name["meterFraPunkt"]:
                     closest_name = name_obj
 
-            st.write(response.json())
             return (closest_name["stedsnavn"][0]["skrivemåte"], str(closest_name["meterFraPunkt"]) + " meter fra valgt punkt", (closest_name["representasjonspunkt"]["nord"], closest_name["representasjonspunkt"]["øst"]))
         except:
             pass
@@ -238,7 +237,7 @@ def wrapper_page():
 
     data = draw_trip_in_map()
     # st.write(data)
-    st.write(data["last_clicked"])
+    # st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
         # polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
