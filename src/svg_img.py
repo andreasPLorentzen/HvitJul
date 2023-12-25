@@ -151,8 +151,8 @@ class image_generation:
         # colors = ["#D1EBE1"]
         # for i in range(2):
         background_rect = SubElement(output_svg, "rect", {
-            "x": str(border_width / 2),
-            "y": str(border_width / 2 ),
+            "x": str(border_width ),
+            "y": str(border_width ),
             "width": str(output_width),
             "height": str(output_height + top_height),
             "fill": "#F0F5FC",
