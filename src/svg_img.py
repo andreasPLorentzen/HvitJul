@@ -1,4 +1,5 @@
 from .snow_data import SnowData
+import streamlit as st
 
 class image_generation:
     '''
@@ -42,8 +43,8 @@ class image_generation:
                 svg_content = file.read()
             return svg_content
         except FileNotFoundError:
-            print(f"Error: File '{file_path}' not found.")
+            st.write(f"Error: File '{file_path}' not found.")
             return None
         except Exception as e:
-            print(f"Error: Unable to load SVG file. {e}")
+            st.write(f"Error: Unable to load SVG file. {e}")
             return None
