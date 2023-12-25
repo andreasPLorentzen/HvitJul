@@ -299,7 +299,7 @@ def write_trees(years=list):
         condition = year_data.snow_level()
         depth = year_data.sd #cm
 
-        st.write(year,condition,depth)
+        st.write(year,str(condition),depth)
 
     for row in range(0,3):
         col1,col2,col3,col4,col5,col6,col7,col8,col9,col10 = st.columns(10,gap="small")
