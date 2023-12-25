@@ -20,6 +20,8 @@ class image_generation:
             year = year_obj.date.year
             condition = year_obj.snow_level()
             depth = f"{year_obj.sd} cm"  # cm
+            st.write(year,condition,depth)
+            st.write(self.images.keys())
             # alter the svg
             svg_list.append(self._alter_text_in_image( self.images[condition.name], year=year,snow_depth=depth))
 
