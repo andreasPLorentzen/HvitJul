@@ -9,4 +9,4 @@ if __name__ == "__main__":
         # st.write(image)
         st.image(image, caption=index)
 
-    #wrapper_page()
+    wrapper_page()

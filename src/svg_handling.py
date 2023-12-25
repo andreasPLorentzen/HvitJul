@@ -92,6 +92,7 @@ def create_svg_grid_str(svg_strings, images_per_row=10):
     return tostring(output_svg, encoding='unicode')
 
 def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_per_row=10):
+    top_height = 75
     # Assume the viewBox dimensions represent svg_width and svg_height (fallback default size)
     svg_width, svg_height = 100, 150
 
@@ -108,7 +109,7 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     # Calculate new canvas width and height based on image per row and number of rows needed
     output_width = svg_width * images_per_row
     rows_needed = ((len(svg_strings) + images_per_row - 1) // images_per_row)
-    output_height = svg_height * rows_needed + 75
+    output_height = svg_height * rows_needed + top_height
 
     # Create the root <svg> element for the output SVG
     output_svg = Element("svg", xmlns="http://www.w3.org/2000/svg", version="1.1")
@@ -122,6 +123,18 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     # Set info_svg position at the bottom right of the grid
     info_svg.set('x', str(output_width - float(info_svg.get('width', '100'))))
     info_svg.set('y', str(output_height - float(info_svg.get('height', '50'))))
+
+    # Draw border around the entire grid
+    border_width=1
+    border_rect = SubElement(output_svg, "rect", {
+        "x": str(border_width / 2),
+        "y": str(border_width / 2 + top_height),
+        "width": str(output_width),
+        "height": str(output_height),
+        "fill": "none",
+        "stroke": "black",
+        "stroke-width": str(border_width)
+    })
 
     # Append the top SVG element
     output_svg.append(top_svg)
