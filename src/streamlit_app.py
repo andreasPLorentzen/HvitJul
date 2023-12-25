@@ -122,7 +122,7 @@ def get_place_name(lat,long):
         "nord": lat,
         "ost": long,
         "koordsys": 4258,
-        "radius": 500,
+        "radius": 5000,
         "fuzzy": "true",
         "utkoordsys": "4258",
         "treffPerSide": "1",
@@ -133,17 +133,28 @@ def get_place_name(lat,long):
 
     if response.status_code == 200:
         try:
-            return response.json()["navn"][0]["stedsnavn"][0]["skrivemåte"]
+            data = response.json()["navn"][0]
+            return data["stedsnavn"][0]["skrivemåte"], data[data["kommuner"][0]["kommunenavn"]]
         except:
-            return "Stedsnavn ikke funnet."
+            return ("Stedsnavn ikke funnet.", "")
     else:
-        return "Ikke noe sted valgt."
+        return ("Ikke noe sted valgt.", "")
 
+def get_place_name_as_markdown(lat,long):
+
+    navn,kommune = get_place_name(lat,long)
+
+    html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
+         f'<p style="font-size: 1.5em; font-weight: italic; margin-left: 10px; display: inline;">{kommune}</p>'
 
 def placenames_options(querey):
     if len(querey) < 4:
         return [""]
     return get_x_first_place_names(querey)[0]
+
+
+
+
 
 def wrapper_page():
     # st.set_page_config(layout="wide")
@@ -179,8 +190,9 @@ def wrapper_page():
         # st.write(polygon)
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
-        location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
-        st.header(f"{location_name}")
+        # location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
+        # st.header(f"{location_name}")
+        st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
         # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2023))
         # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
     import time
