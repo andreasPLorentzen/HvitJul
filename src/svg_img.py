@@ -8,7 +8,7 @@ class image_generation:
     '''
     Creates an svg image in a grid. Uses pre-defined svg strings
     '''
-    def __init__(self, list_of_years=[SnowData], title="unknown", sub_title="Meh") -> str:
+    def __init__(self, list_of_years=[], title="unknown", sub_title="Meh"):
 
         # loads svg_data_from files:
         self.images = self._load_svg()
@@ -16,6 +16,7 @@ class image_generation:
         # create svg strings
         svg_list = []
         for year_obj in list_of_years:
+            st.write(year_obj)
             year = year_obj.date.year
             condition = year_obj.snow_level()
             depth = f"{year_obj.sd} cm"  # cm
