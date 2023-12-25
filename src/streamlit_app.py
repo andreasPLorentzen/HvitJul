@@ -16,7 +16,7 @@ INPUT_MAP_ZOOM = 8
 def draw_trip_in_map():
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
-    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False,height=500)
+    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False,height=300, width="100%")
 
 
     # NOT REALLY A GOOD WAY, but all other attempts seems to fail...
