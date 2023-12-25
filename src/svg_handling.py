@@ -109,71 +109,72 @@ def create_svg_grid_test():
 def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_width="2"):
     # Parse the SVG string
     svg_tree = fromstring(svg_string)
-    existing_viewbox = svg_tree.get("viewBox")
+    width = svg_tree.get("width", "200")  # default fallback width
+    height = svg_tree.get("height", "200")  # default fallback height
 
-    # If viewBox is not set, this will be a little more complex.
-    if not existing_viewbox:
-        raise ValueError("SVG must have a viewBox attribute to determine dimensions.")
+    # These offsets will be used to position elements; they are arbitrary and may need adjusting
+    title_offset = 50  # Additional space at the top for the title
+    info_offset = 20  # Additional space at the bottom for info text
+    border_offset = float(border_width) / 2  # Adjust the border to sit nicely within view
 
-    # Extract the current viewBox values to determine dimensions
-    min_x, min_y, width, height = map(float, existing_viewbox.split(' '))
+    # Convert to float for calculations
+    width = float(width)
+    height = float(height) + title_offset + info_offset
 
-    # Create a group to hold the original SVG content and the border
-    group = Element("g")
-    group.set("transform", "translate(0,40)")
-
-    # Move original SVG content inside the group
-    group.extend(svg_tree.getchildren())
-
-    # Apply the group to the tree
-    svg_tree.clear()
-    svg_tree.append(group)
-
-    # Adjust viewbox height for title/subtitle space (arbitrarily chosen as 40 units) and info text
-    new_viewbox = f"{min_x} {min_y - 40} {width} {height + 60}"
-    svg_tree.set("viewBox", new_viewbox)
-
-    # Set updated width and height
+    # Update the SVG's width and height to make room for the title, subtitle, and info text
     svg_tree.set("width", str(width))
-    svg_tree.set("height", str(height + 60))
+    svg_tree.set("height", str(height))
+
+    # Update any existing content to shift it down by title_offset
+    for element in svg_tree:
+        if 'transform' in element.attrib:
+            transform = element.attrib['transform']
+            # Extract and update existing translate values in the transform if needed
+            # This part assumes a transform already exists with a translate command
+        else:
+            element.set("transform", f"translate(0,{title_offset})")
 
     # Create a red border rectangle
-    border_rect = SubElement(svg_tree, "rect")
-    border_rect.set("x", str(min_x))
-    border_rect.set("y", str(min_y))
-    border_rect.set("width", str(width))
-    border_rect.set("height", str(height))
-    border_rect.set("fill", "none")
-    border_rect.set("stroke", border_color)
-    border_rect.set("stroke-width", border_width)
+    border_rect = SubElement(svg_tree, "rect", {
+        "x": str(border_offset),
+        "y": str(border_offset + title_offset),
+        "width": str(width - border_width),
+        "height": str(height - title_offset - info_offset - border_width),
+        "fill": "none",
+        "stroke": border_color,
+        "stroke-width": border_width
+    })
 
     # Add title
-    title_text = SubElement(svg_tree, "text")
+    title_text = SubElement(svg_tree, "text", {
+        "x": str(width / 2),
+        "y": str(title_offset / 2),
+        "text-anchor": "middle",
+        "font-size": "14",
+        "font-weight": "bold",
+        "fill": border_color
+    })
     title_text.text = title
-    title_text.set("x", str(width / 2))
-    title_text.set("y", str(min_y - 20))
-    title_text.set("text-anchor", "middle")
-    title_text.set("font-size", "14")
-    title_text.set("font-weight", "bold")
-    title_text.set("fill", border_color)
 
     # Add subtitle
-    subtitle_text = SubElement(svg_tree, "text")
+    subtitle_text = SubElement(svg_tree, "text", {
+        "x": str(width / 2),
+        "y": str(3 * title_offset / 4),
+        "text-anchor": "middle",
+        "font-size": "10",
+        "fill": border_color
+    })
     subtitle_text.text = subtitle
-    subtitle_text.set("x", str(width / 2))
-    subtitle_text.set("y", str(min_y - 5))
-    subtitle_text.set("text-anchor", "middle")
-    subtitle_text.set("font-size", "10")
-    subtitle_text.set("fill", border_color)
 
     # Add info in the lower right corner
-    info_text = SubElement(svg_tree, "text")
+    info_text = SubElement(svg_tree, "text", {
+        "x": str(width - 5),
+        "y": str(height - 5),
+        "text-anchor": "end",
+        "font-size": "8",
+        "fill": border_color
+    })
     info_text.text = info
-    info_text.set("x", str(width - 5))
-    info_text.set("y", str(height + 45))  # Place it 45 units below the original SVG height
-    info_text.set("text-anchor", "end")
-    info_text.set("font-size", "8")
-    info_text.set("fill", border_color)
 
     # Return the updated SVG as a string
     return tostring(svg_tree, xml_declaration=True, encoding='utf-8', method='xml').decode()
