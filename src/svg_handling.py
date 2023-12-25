@@ -155,7 +155,7 @@ def create_svg_grid_test():
     top = '''
     <svg viewBox="0 0 200.337 81.65" width="200.337" height="81.65" xmlns="http://www.w3.org/2000/svg">
       <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; white-space: pre;" x="79.124" y="37.224" transform="matrix(1.248075008392334, 0, 0, 1.375, -0.27718898653983715, -5.751928806304932)">TITLE_TEXT</text>
-      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6364px; font-style: italic; text-anchor: middle; white-space: pre;" transform="matrix(1.248075008392334, 0, 0, 1.375, -2.8451161384582484, 19.80634307861328)" x="79.124" y="37.224">SUBTITLE_TEXT</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6364px; font-style: italic; text-anchor: middle; white-space: pre;" transform="matrix(1.248075008392334, 0, 0, 1.375, -2.8451161384582484, 19.80634307861328)" x="79.124" y="37.224">SUB_TEXT</text>
     </svg>
     '''
 
@@ -171,9 +171,18 @@ def create_svg_grid_test():
         moderate,
         moderate,
         moderate,
+        moderate,
+        moderate,
+        moderate,
+        moderate,
+        moderate,
+        moderate,
+        moderate,
+        moderate,
+        moderate,
     ]
     # return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
-    top = top.replace("TITLE_TEXT", "Oslo").replace("SUBTITLE_TEXT", "Lokasjon bla bla bla")
+    top = top.replace("TITLE_TEXT", "Oslo").replace("SUB_TEXT", "Lokasjon bla bla bla")
     info = info.replace("INFO_TEXT", "Laget av Andreas Lorentzen")
     return_string = create_svg_grid_str_v2(list_of_strings, images_per_row=4,top_svg_string=top, info_svg_string=info)
 
