@@ -73,7 +73,7 @@ class image_generation:
             return None
 
     def _alter_text_in_image(self, svg_str, title=None, sub_title=None, info=None, year=None, snow_depth=None):
-        return_svg = svg_str
+        return_svg = str(svg_str)
 
         if title is not None:
             return_svg.replace("TITLE_TEXT", title)
