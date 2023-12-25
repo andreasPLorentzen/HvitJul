@@ -263,6 +263,7 @@ def wrapper_page():
         st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
         marker = folium.Marker([lat, lon])
         st.session_state["markers"] = [marker]
+        st.write([marker])
 
     import time
 
