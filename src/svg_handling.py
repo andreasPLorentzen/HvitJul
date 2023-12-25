@@ -108,7 +108,7 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     # Calculate new canvas width and height based on image per row and number of rows needed
     output_width = svg_width * images_per_row
     rows_needed = ((len(svg_strings) + images_per_row - 1) // images_per_row)
-    output_height = svg_height * rows_needed + 200
+    output_height = svg_height * rows_needed + 50
 
     # Create the root <svg> element for the output SVG
     output_svg = Element("svg", xmlns="http://www.w3.org/2000/svg", version="1.1")
@@ -152,6 +152,18 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     return tostring(output_svg, encoding='unicode')
 
 def create_svg_grid_test():
+    top = '''
+    <svg viewBox="0 0 200.337 81.65" width="200.337" height="81.65" xmlns="http://www.w3.org/2000/svg">
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; white-space: pre;" x="79.124" y="37.224" transform="matrix(1.248075008392334, 0, 0, 1.375, -0.27718898653983715, -5.751928806304932)">TITLE_TEXT</text>
+      <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6364px; font-style: italic; text-anchor: middle; white-space: pre;" transform="matrix(1.248075008392334, 0, 0, 1.375, -2.8451161384582484, 19.80634307861328)" x="79.124" y="37.224">SUBTITLE_TEXT</text>
+    </svg>
+    '''
+
+    info = '''
+    <svg viewBox="0 0 132.155 16.835" width="132.155" height="16.835" xmlns="http://www.w3.org/2000/svg">
+      <text style="fill: rgb(183, 183, 183); font-family: Arial, sans-serif; font-size: 9px; font-style: italic; text-anchor: end; white-space: pre;" x="125" y="11.363" transform="matrix(1, 0, 0, 1, 3.552713678800501e-15, 0)">INFO_TEXT</text>
+    </svg>
+    '''
     list_of_strings = [
         moderate,
         moderate,
@@ -160,13 +172,9 @@ def create_svg_grid_test():
         moderate,
         moderate,
     ]
-    return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
-    # return_string = enhance_svg(return_string,"Oslo", "ostepopp", "Laget av andreas")
-    original_svg_string = '<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg"><!-- SVG content here --></svg>'
-    title = "My SVG Title"
-    # return_string = add_title_to_svg(svg_string=return_string,title_text=title)
-    # return_string = add_marginalia_to_svg(return_string,"Oslo", "wooop", "Andreas shøjæ")
-
+    # return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
+    top = top.replace("TITLE_TEXT", "Oslo").replace("SUBTITLE_TEXT", "Lokasjon bla bla bla")
+    info = info.replace("INFO_TEXT", "Laget av Andreas Lorentzen")
     return_string = create_svg_grid_str_v2(list_of_strings, images_per_row=4,top_svg_string=top, info_svg_string=info)
 
     return return_string
@@ -329,18 +337,6 @@ def add_marginalia_to_svg(svg_string, title, subtitle, info_text):
     # Return updated SVG as a string
     return tostring(svg, encoding='unicode')
 
-top = '''
-<svg viewBox="0 0 200.337 81.65" width="200.337" height="81.65" xmlns="http://www.w3.org/2000/svg">
-  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; white-space: pre;" x="79.124" y="37.224" transform="matrix(1.248075008392334, 0, 0, 1.375, -0.27718898653983715, -5.751928806304932)">TITLE_TEXT</text>
-  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6364px; font-style: italic; text-anchor: middle; white-space: pre;" transform="matrix(1.248075008392334, 0, 0, 1.375, -2.8451161384582484, 19.80634307861328)" x="79.124" y="37.224">SUBTITLE_TEXT</text>
-</svg>
-'''
-
-info = '''
-<svg viewBox="0 0 132.155 16.835" width="132.155" height="16.835" xmlns="http://www.w3.org/2000/svg">
-  <text style="fill: rgb(183, 183, 183); font-family: Arial, sans-serif; font-size: 9px; font-style: italic; text-anchor: end; white-space: pre;" x="125" y="11.363" transform="matrix(1, 0, 0, 1, 3.552713678800501e-15, 0)">INFO_TEXT</text>
-</svg>
-'''
 
 
 moderate = '''
