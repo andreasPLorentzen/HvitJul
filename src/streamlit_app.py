@@ -139,7 +139,7 @@ def get_place_name(lat,long):
         params["radius"] *= 2
         st.write(params["radius"], "meter...")
 
-        if params["radius"] > 100000:
+        if params["radius"] > 10000:
             data =  [
                         {
                             "meterFraPunkt": 0,
