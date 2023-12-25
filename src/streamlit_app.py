@@ -338,7 +338,7 @@ def write_trees(years=list):
 
 
     image = image_generation(years_list,"TEST", "VIRKELIG")
-    st.write(image.result_image)
+    # st.write(image.result_image)
     st.image(image.result_image)
 
     for row in range(0,3):

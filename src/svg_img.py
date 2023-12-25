@@ -16,12 +16,12 @@ class image_generation:
         # create svg strings
         svg_list = []
         for year_obj in list_of_years:
-            st.write(year_obj)
+            # st.write(year_obj)
             year = year_obj.date.year
             condition = str(year_obj.snow_level().name)
             depth = f"{year_obj.sd} cm"  # cm
-            st.write(year,condition,depth)
-            st.write(self.images.keys())
+            # st.write(year,condition,depth)
+            # st.write(self.images.keys())
             # alter the svg
 
             # st.write("SNOW_LEVEL_" + condition)
