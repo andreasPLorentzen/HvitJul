@@ -122,7 +122,7 @@ def get_place_name(lat,long):
         "nord": lat,
         "ost": long,
         "koordsys": 4258,
-        "radius": 100,
+        "radius": 300,
         "fuzzy": "true",
         "utkoordsys": "4258",
         "treffPerSide": "10",
@@ -164,7 +164,6 @@ def get_place_name(lat,long):
              ]
 
             break
-
 
 
     if response.status_code == 200:
