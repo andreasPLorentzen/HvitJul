@@ -115,8 +115,8 @@ def get_x_first_place_names(query, x=10) -> (list,list):
             break
     return return_list, api_request
 
-def get_place_name(lat,long):
-    url = f"https://api.kartverket.no/stedsnavn/v1/punkt?"
+def get_place_name(lat,long) -> (str, str, (float, float)):
+    # Using kartverkets API
     base_url = "https://api.kartverket.no/stedsnavn/v1/punkt"
     params = {
         "nord": lat,
@@ -129,6 +129,7 @@ def get_place_name(lat,long):
         "side": "1"
     }
 
+    # getting response from API inside search radius. the radius doubles every try
     while True:
 
         response = requests.get(base_url, params=params)
@@ -137,7 +138,7 @@ def get_place_name(lat,long):
                 data = response.json()["navn"]
                 break
         params["radius"] *= 2
-        st.write(params["radius"], "meter...")
+        # st.write(params["radius"], "meter...")
 
         if params["radius"] > 10000:
             data =  [
@@ -165,26 +166,30 @@ def get_place_name(lat,long):
 
             break
 
-
     if response.status_code == 200:
         try:
             data = response.json()["navn"]
             closest_name = data[0]
 
+            # Finds closest name object
             for name_obj in data:
                 if name_obj["meterFraPunkt"] < closest_name["meterFraPunkt"]:
                     closest_name = name_obj
 
-
             st.write(response.json())
             return (closest_name["stedsnavn"][0]["skrivemåte"], str(closest_name["meterFraPunkt"]) + " meter fra valgt punkt", (closest_name["representasjonspunkt"]["nord"], closest_name["representasjonspunkt"]["øst"]))
         except:
-            return ("Stedsnavn ikke funnet", "", (lat,long))
-    else:
-        return ("Stedsnvan ikke funnet", "", (lat,long))
+            pass
 
-def get_place_name_as_markdown(lat,long):
+    return ("Stedsnvan ikke funnet", "", (lat,long))
 
+def get_place_name_as_markdown(lat,long) -> str:
+    '''
+    Returns a markdown in html
+    :param lat:
+    :param long:
+    :return:
+    '''
     navn,distance,coords = get_place_name(lat,long)
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
@@ -209,6 +214,9 @@ def wrapper_page():
     lon = None
 
     st.title("Hvor hvit er egentlig jula?")
+    st.text("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen? \n"
+            "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.\n"
+            "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no")
 
     place_query = st.text_input("Enter a place name", "")
     if place_query:
