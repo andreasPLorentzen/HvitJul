@@ -292,6 +292,14 @@ def wrapper_page():
     write_trees(list_of_years)
 
 def write_trees(years=list):
+    hide_img_fs = '''
+    <style>
+    button[title="View fullscreen"]{
+        visibility: hidden;}
+    </style>
+    '''
+
+    st.markdown(hide_img_fs, unsafe_allow_html=True)
 
     years_list = years
     for year_data in years_list:
@@ -307,7 +315,7 @@ def write_trees(years=list):
         i = 2023
         for col in cols:
             with col:
-                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png", caption=i)
+                st.image(f"Graphics/SNOW_{random.randint(0,2)}.png", caption=i,use_column_width="always")
                 # st.markdown(
                 #     f"<div style='text-align: center; padding-top: 0px;'>{years_list[0][0]}</div>",
                 #     unsafe_allow_html=True
