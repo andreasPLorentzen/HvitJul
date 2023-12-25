@@ -125,16 +125,16 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     info_svg.set('y', str(output_height - float(info_svg.get('height', '50'))))
 
     # Draw border around the entire grid
-    border_width=1
-    border_rect = SubElement(output_svg, "rect", {
-        "x": str(border_width / 2),
-        "y": str(border_width / 2 + top_height),
-        "width": str(output_width),
-        "height": str(output_height),
-        "fill": "none",
-        "stroke": "black",
-        "stroke-width": str(border_width)
-    })
+    border_width=5
+    # border_rect = SubElement(output_svg, "rect", {
+    #     "x": str(border_width / 2),
+    #     "y": str(border_width / 2 + top_height),
+    #     "width": str(output_width),
+    #     "height": str(output_height),
+    #     "fill": "none",
+    #     "stroke": "black",
+    #     "stroke-width": str(border_width)
+    # })
 
     # Create alternating background rectangles
     # colors = ["#D1EBE1"]
@@ -144,8 +144,8 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
         "y": str(border_width / 2 + top_height),
         "width": str(output_width),
         "height": str(output_height),
-        "fill": "#D1EBE1",
-        "stroke": "black",
+        "fill": "#F0F5FC",
+        "stroke": "#D1EBE1",
         "stroke-width": str(border_width)
         })
 
