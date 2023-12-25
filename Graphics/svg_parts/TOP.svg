@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 200.337 81.65" width="200.337" height="81.65" xmlns="http://www.w3.org/2000/svg">
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 24px; font-weight: 700; text-anchor: middle; white-space: pre;" x="79.124" y="37.224" transform="matrix(1.248075008392334, 0, 0, 1.375, -0.27718898653983715, -5.751928806304932)">TITLE_TEXT</text>
+  <text style="fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 11.6364px; font-style: italic; text-anchor: middle; white-space: pre;" transform="matrix(1.248075008392334, 0, 0, 1.375, -2.8451161384582484, 19.80634307861328)" x="79.124" y="37.224">SUBTITLE_TEXT</text>
+</svg>
