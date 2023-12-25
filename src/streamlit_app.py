@@ -65,7 +65,7 @@ def draw_trip_in_map():
 
 
     # data = st_folium(f_m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
-    data = st_folium(m, width=725)
+    data = st_folium(m, width=725, height=400)
     # data =  st_folium(m)
     # # if data["last_clicked"] is not None:
     if data.get("last_clicked"):
@@ -214,22 +214,22 @@ def wrapper_page():
     lon = None
 
     st.title("Hvor hvit er egentlig jula?")
-    st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen? <br/>"
-            "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/>"
+    st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
+            "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
             "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
-    place_query = st.text_input("Enter a place name", "")
-    if place_query:
-        # place_names = get_place_names(place_query)
-        # st.write(place_names)
-        first_10_place_names, place_names = get_x_first_place_names(place_query, 10)
-        # st.write(first_10_place_names)
-        if 'navn' in place_names:
-            # options = [place['navn'] for place in place_names['navn']]
-            options = first_10_place_names
-            st.selectbox("Select a place", options)
-        else:
-            st.warning("No places found for your query.")
+    # place_query = st.text_input("Enter a place name", "")
+    # if place_query:
+    #     # place_names = get_place_names(place_query)
+    #     # st.write(place_names)
+    #     first_10_place_names, place_names = get_x_first_place_names(place_query, 10)
+    #     # st.write(first_10_place_names)
+    #     if 'navn' in place_names:
+    #         # options = [place['navn'] for place in place_names['navn']]
+    #         options = first_10_place_names
+    #         st.selectbox("Select a place", options)
+    #     else:
+    #         st.warning("No places found for your query.")
 
     # test = "Tynset"
     # options = placenames_options(test)
