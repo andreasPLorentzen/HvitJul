@@ -7,13 +7,13 @@ from .utils import convert_coordinates
 from .snow_data import SnowData
 
 GTS_RELEVANT_INFORMATION = {
-    'tm':'temperature',
-    'sd':'snow_depth',
+    #'tm':'temperature',
+    'sd':'snow_depth', # The only one we find relevant for now
     #'swe':'snow_weight_equivalent',
     #'swechange7d':'snow_weight_equivalent_change_last_7_days',
     #'age':'snow_age',
     #'lwc':'snow_state',
-    'fsw':'new_snow_last_day',
+    #'fsw':'new_snow_last_day',
     #'fsw7d':'new_snow_last_7_days',
     #'sdfsw':'new_snow_depth',
     #'qsw':'snow_melt_last_day',

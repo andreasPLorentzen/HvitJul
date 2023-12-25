@@ -13,23 +13,23 @@ class SnowData:
 
     tm: float = field(default=0) # Tempratur i *C
     sd: float = field(default=0) # Snødybde i cm
-    swe: float = field(default=0) #
-    swechange7d: float = field(default=0)
-    age: float = field(default=0)
-    lwc: float = field(default=0)
-    fsw: float = field(default=0)
-    fsw7d: float = field(default=0)
-    sdfsw: float = field(default=0)
-    qsw: float = field(default=0)
+    swe: float = field(default=0) # Snow Water Equvilant - Snømengde i cm
+    swechange7d: float = field(default=0) # Snow Water Equvilant - Snømengde i cm - Endring siste 7 dager
+    age: float = field(default=0) # Snøens Alder
+    lwc: float = field(default=0) # Snøtilstand 
+    fsw: float = field(default=0) # Nysnø siste døgn i cm
+    fsw7d: float = field(default=0) # Nysnø siste 7 døgn i cm
+    sdfsw: float = field(default=0) # Nysnødybde i cm
+    qsw: float = field(default=0) # Snøsmelting siste døgn i cm
 
 
     def snow_level(self) -> bool:
         if not self.success: return SnowLevel.ERROR
-        if self.sd > 100: return SnowLevel.SEVERE
-        if self.sd > 50: return SnowLevel.HEAVY
+        if self.sd > 80: return SnowLevel.SEVERE
+        if self.sd > 40: return SnowLevel.HEAVY
         if self.sd > 7: return SnowLevel.MODERATE
-        if self.sd > 3: return SnowLevel.LIGHT
-        if self.sd > 0.5: return SnowLevel.TRACE
+        if self.sd > 2: return SnowLevel.LIGHT
+        if self.sd > 0.2: return SnowLevel.TRACE
         return SnowLevel.NONE
     
     def set_value(self, key: str, value):
