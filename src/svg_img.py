@@ -26,7 +26,8 @@ class image_generation:
 
             st.write("SNOW_LEVEL_" + condition)
             st.write("SNOW_LEVEL_" + condition in self.images.keys())
-            svg_list.append(self._alter_text_in_image(self.images["SNOW_LEVEL_" + condition], year=year,snow_depth=depth))
+            st.write(self.images["SNOW_LEVEL_" + condition])
+            svg_list.append(self._alter_text_in_image(, year=year,snow_depth=depth))
 
 
         # alter top and info
