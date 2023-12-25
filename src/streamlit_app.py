@@ -233,15 +233,15 @@ def wrapper_page():
             "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
 
-    #testing image
-    from .svg_handling import create_svg_grid_test
-    svg = create_svg_grid_test()
-    st.image(svg)
-
-
-
-
-
+    # #testing image
+    # from .svg_handling import create_svg_grid_test
+    # svg = create_svg_grid_test()
+    # st.image(svg)
+    #
+    #
+    #
+    #
+    #
 
 
 
@@ -338,7 +338,7 @@ def write_trees(years=list):
 
 
     image = image_generation(years_list,"TEST", "VIRKELIG")
-
+    st.write(image)
     st.image(image)
 
     for row in range(0,3):
