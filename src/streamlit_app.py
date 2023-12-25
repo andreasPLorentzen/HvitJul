@@ -299,6 +299,7 @@ def main_page():
 
         if st.button("Utvid til 50 år"):
             earliest_year = this_year - 50
+            st.write(earliest_year)
 
 
 def more_info():
