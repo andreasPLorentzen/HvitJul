@@ -255,10 +255,12 @@ def wrapper_page():
     if lat is not None:
         with st.status("Henter historiske snøberegninger fra NVE"):
             for year in range(2020,2024).__reversed__():
-                st.write(f"Henter data for {year}")
+
                 year_data = GridTimeSeriesAPI.get_snow_info(lat,lon,year)
                 if year_data.success == False:
-                    break
+                    st.write(f"Feil med data for {year}")
+                else:
+                    st.write(f"Henter data for {year}")
                 list_of_years.append(year_data)
             st.write("done! let it snow")
             st.snow()
