@@ -296,7 +296,7 @@ def write_trees(years=list):
     years_list = years
     for year_data in years_list:
         year = year_data.date.year
-        condition = year.snow_level()
+        condition = year_data.snow_level()
         depth = year_data.sd #cm
 
         st.write(year,condition,depth)
