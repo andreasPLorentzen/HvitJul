@@ -20,30 +20,20 @@ class image_generation:
             year = year_obj.date.year
             condition = str(year_obj.snow_level().name)
             depth = f"{year_obj.sd} cm"  # cm
-            # st.write(year,condition,depth)
-            # st.write(self.images.keys())
-            # alter the svg
 
-            # st.write("SNOW_LEVEL_" + condition)
-            # st.write("SNOW_LEVEL_" + condition in self.images.keys())
-            # st.write(self.images["SNOW_LEVEL_" + condition])
             tree_image = f'{self.images["SNOW_LEVEL_" + condition]}'
             tree_image = str(tree_image.replace("YEAR_TEXT", str(year)))
-            tree_image = str(tree_image.replace("SUB_TEXT", str(depth)))
+            tree_image = str(tree_image.replace("SNOW_DEPTH_TEXT", str(depth)))
             svg_list.append(tree_image)
             # svg_list.append(self._alter_text_in_image(self.images["SNOW_LEVEL_" + condition], year=year,snow_depth=depth))
 
 
         # alter top and info
-        st.write(self.images["TOP"])
+
         top = str(self.images["TOP"])
-        st.write(".....")
-        st.write(top)
         top = str(top.replace("SUBTITLE_TEXT", sub_title))
         top = str(top.replace("TITLE_TEXT", title))
 
-        st.write(".....")
-        st.write(top)
         info = self.images["INFO"]
         info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen")
         # generate image:
