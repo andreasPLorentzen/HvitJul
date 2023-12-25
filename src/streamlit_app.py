@@ -260,6 +260,8 @@ def wrapper_page():
 
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
+        marker = folium.Marker([lat, lon])
+        st.session_state["markers"] = [marker]
 
         # update marker in map
         st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
@@ -287,20 +289,25 @@ def wrapper_page():
             st.write(year.date.year, year.snow_level(), year.sd)
 
 
-    # write_trees({"ost":1})
+    write_trees(list_of_years)
 
-def write_trees(years=dict):
-    years = {
-        2024: 0,
-        2023: 2,
-        2022: 1,
-        2021: 0,
-        2020: 0,
-        2019: 0,
-    }
+def write_trees(years=list):
+    # years = {
+    #     2024: 0,
+    #     2023: 2,
+    #     2022: 1,
+    #     2021: 0,
+    #     2020: 0,
+    #     2019: 0,
+    # }
     years_list = []
-    for year, category in years.items():
-        years_list.append((year, category))
+    for year_data in years_list:
+        year = year_data.date.year
+        conditions = year.snow_level()
+        depth = year_data.sd #cm
+        # years_list.append((year, category))
+
+        st.write(year,condition,depth)
 
     for row in range(0,3):
         col1,col2,col3,col4,col5,col6,col7,col8,col9,col10 = st.columns(10,gap="small")
