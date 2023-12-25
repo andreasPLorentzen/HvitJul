@@ -85,6 +85,8 @@ class image_generation:
             return_svg.replace("INFO_TEXT", info)
 
         if year is not None:
+            st.write("what?")
+            st.write(return_svg.replace("YEAR_TEXT", year)
             return_svg.replace("YEAR_TEXT", year)
 
         if year is not None:
