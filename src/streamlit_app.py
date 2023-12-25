@@ -3,6 +3,7 @@ import folium
 from folium.plugins import Draw
 from streamlit_folium import st_folium
 from src.gts_api import GridTimeSeriesAPI
+from src.svg_img import image_generation
 
 from .utils import polygon_from_point
 import random, requests
@@ -334,6 +335,11 @@ def write_trees(years=list):
         depth = year_data.sd #cm
 
         st.write(year,condition.value,depth)
+
+
+    image = image_generation(years_list,"TEST", "VIRKELIG")
+
+    st.image(image)
 
     for row in range(0,3):
         col1,col2,col3,col4,col5,col6,col7,col8,col9,col10 = st.columns(10,gap="small")
