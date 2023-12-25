@@ -162,7 +162,7 @@ def get_place_name_as_markdown(lat,long):
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
          f'<p style="font-size: 1.5em; font-weight: italic; margin-left: 10px; display: inline;">{kommune} meter fra valgt punkt</p>'\
-         f'<br/><p style="font-size: 1.5em; font-weight: italic; margin-left: 10px; display: inline;">Koordinater: {coords[1]} øst, {coords[0]}, nord)</p>'
+         f'<br/><p style="font-size: 1em; font-weight: italic; display: inline;">Koordinater: {round(coords[1],2)}° øst, {round(coords[0])}° nord</p>'
 
 
     return html
