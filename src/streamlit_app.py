@@ -223,13 +223,8 @@ def place_querey():
     # st.write(test)
 
 def wrapper_page():
-<<<<<<< HEAD
-    st.set_page_config(page_title="Var det en hvit jul?")
-    st.set_page_config(page_icon="./Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg")
-=======
-    # st.set_page_config(layout="wide")
     st.set_page_config(page_title="Var det en hvit jul?", page_icon="./Graphics/SNOW_1.png")
->>>>>>> origin/main
+
     lat = None
     lon = None
 
@@ -311,26 +306,10 @@ def write_trees(years=list):
 
 
     image = image_generation(years_list,"TEST", "VIRKELIG")
-    # st.write(image.result_image)
+
     st.image(image.result_image)
 
 
-    # for row in range(0,3):
-    #     col1,col2,col3,col4,col5,col6,col7,col8,col9,col10 = st.columns(10,gap="small")
-    #     cols = [col1,col2,col3,col4,col5,col6,col7,col8,col9,col10]
-    #     i = 2023
-    #     for col in cols:
-    #         with col:
-    #             st.image(f"Graphics/SNOW_{random.randint(0,2)}.png", caption=f"{i} \n 35cm",use_column_width="always")
-    #             # st.markdown(
-    #             #     f"<div style='text-align: center; padding-top: 0px;'>{years_list[0][0]}</div>",
-    #             #     unsafe_allow_html=True
-    #             # )
-    #         i -= 1
-    # # graphics = {
-    # #     0: "SNOW_0"
-    # # }
-    #
 
 
 
