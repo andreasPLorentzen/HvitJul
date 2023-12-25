@@ -194,7 +194,7 @@ def wrapper_page():
 
 
         for year in list_of_years:
-            st.write(year.as_dict())
+            st.write(year.date, year.snow_level())
 
 
     # write_trees({"ost":1})
