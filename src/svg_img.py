@@ -39,7 +39,7 @@ class image_generation:
         top = str(self.images["TOP"])
         st.write(".....")
         st.write(top)
-        top.replace("TITLE_TEXT", title)
+        top.replace("TITLE_TEXT", "CAKE?")
         top.replace("SUB_TEXT", sub_title)
         st.write(".....")
         st.write(top)
