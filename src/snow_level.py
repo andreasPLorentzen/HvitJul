@@ -1,7 +1,7 @@
 from enum import Enum
 
 class SnowLevel(Enum):
-    ERROR = "error"
+    ERROR = 99
     NONE = 0
     TRACE = 1
     LIGHT = 2
