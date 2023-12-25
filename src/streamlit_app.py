@@ -285,8 +285,8 @@ def wrapper_page():
                     st.write(f"Hentet data for {year}")
                 list_of_years.append(year_data)
             st.write("done! let it snow")
-            st.snow()
 
+        st.snow()
         image = image_generation(list_of_years, "TEST", "VIRKELIG")
         # st.write(image.result_image)
         st.image(image.result_image)
