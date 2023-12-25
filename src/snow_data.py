@@ -9,6 +9,7 @@ class SnowData:
     date: date # datetime.date
     longitude: float = field(default=None)
     latitude: float = field(default=None)
+    success: bool = field(default=False)
 
     tm: float = field(default=0) # Tempratur i *C
     sd: float = field(default=0) # Snødybde i cm
@@ -20,6 +21,7 @@ class SnowData:
     fsw7d: float = field(default=0)
     sdfsw: float = field(default=0)
     qsw: float = field(default=0)
+
 
     def snow_level(self) -> bool:
         if self.sd > 100: return SnowLevel.SEVERE

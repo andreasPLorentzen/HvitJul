@@ -32,13 +32,17 @@ class GridTimeSeriesAPI:
         end_date = f'{year}-{month}-{day}'
         wd = SnowData(date(year, month, day), longitude=lon, latitude=lat)
 
-        for data_type, description in GTS_RELEVANT_INFORMATION.items():
-            url = f'https://gts.nve.no/api/GridTimeSeries/{int(x)}/{int(y)}/{start_date}/{end_date}/{data_type}.json'
-            response = requests.get(url)
-            if response.status_code == 200:
-                response_dict = json.loads(response.text)
-                data = mean(response_dict['Data'])
-                wd.set_value(data_type, data)
+        try:
+            for data_type, description in GTS_RELEVANT_INFORMATION.items():
+                url = f'https://gts.nve.no/api/GridTimeSeries/{int(x)}/{int(y)}/{start_date}/{end_date}/{data_type}.json'
+                response = requests.get(url)
+                if response.status_code == 200:
+                    response_dict = json.loads(response.text)
+                    data = mean(response_dict['Data'])
+                    wd.set_value(data_type, data)
+            wd.success = True
+        except Exception as e:
+            print(e)
         return wd
 
     @staticmethod
