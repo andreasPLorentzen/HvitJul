@@ -147,6 +147,8 @@ def placenames_options(querey):
 
 def wrapper_page():
     # st.set_page_config(layout="wide")
+    lat = None
+    lon = None
 
     st.title("Hvor hvit er egentlig jula?")
 
@@ -179,20 +181,20 @@ def wrapper_page():
         lon = data["last_clicked"]["lng"]
         location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
         st.header(f"{location_name}")
-        st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2023))
-        st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
+        # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2023))
+        # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
     import time
 
     list_of_years = []
+    if lat is not None:
+        with st.status("Henter historiske snøberegninger fra NVE"):
+            for year in range(2023,2000):
+                st.write(f"Henter data for {year}")
+                list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
 
-    with st.status("Henter historiske snøberegninger fra NVE"):
-        for year in range(2023,2000):
-            st.write(f"Henter data for {year}")
-            list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
 
-
-    for year in list_of_years:
-        st.write(year.as_dict())
+        for year in list_of_years:
+            st.write(year.as_dict())
 
 
     # write_trees({"ost":1})
