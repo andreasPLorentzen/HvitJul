@@ -186,13 +186,14 @@ def get_place_name_as_markdown(lat,long) -> str:
     :return:
     '''
     navn,distance,coords = get_place_name(lat,long)
+    coords = f"{round(coords[1],2)}° øst, {round(coords[0],2)}° nord"
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
          f'<p style="font-size: 1.2em; font-weight: italic; margin-left: 10px; display: inline;">{distance}</p>'\
-         f'<br/><p style="font-size: 1em; font-weight: italic; display: inline;">{round(coords[1],2)}° øst, {round(coords[0],2)}° nord</p>'
+         f'<br/><p style="font-size: 1em; font-weight: italic; display: inline;">{coords}</p>'
 
 
-    return html
+    return html, str(navn), str(distance), coords
 
 def placenames_options(querey):
     if len(querey) < 4:
@@ -267,7 +268,8 @@ def wrapper_page():
         st.session_state["markers"] = [marker]
 
         # update marker in map
-        st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
+        markdown, name, distance, coords = get_place_name_as_markdown(lat,lon)
+        st.markdown(markdown,unsafe_allow_html=True)
 
 
     import time
@@ -287,7 +289,7 @@ def wrapper_page():
             st.write("done! let it snow")
 
         st.snow()
-        image = image_generation(list_of_years, "TEST", "VIRKELIG")
+        image = image_generation(list_of_years, name, coords)
         # st.write(image.result_image)
         st.image(image.result_image)
 
