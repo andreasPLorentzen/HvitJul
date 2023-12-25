@@ -87,6 +87,10 @@ class image_generation:
 
 
     def _create_svg_grid_str(self, svg_strings, top_svg_string, info_svg_string, images_per_row=10):
+
+        if svg_strings == []:
+            return ""
+
         top_height = 75
         # Assume the viewBox dimensions represent svg_width and svg_height (fallback default size)
         svg_width, svg_height = 100, 150
