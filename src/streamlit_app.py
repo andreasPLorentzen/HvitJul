@@ -222,6 +222,7 @@ def place_querey():
 
 def wrapper_page():
     # st.set_page_config(layout="wide")
+    st.set_page_config(page_title="Var det en hvit jul?")
     lat = None
     lon = None
 
@@ -317,14 +318,14 @@ def wrapper_page():
     write_trees(list_of_years)
 
 def write_trees(years=list):
-    hide_img_fs = '''
-    <style>
-    button[title="View fullscreen"]{
-        visibility: hidden;}
-    </style>
-    '''
-
-    st.markdown(hide_img_fs, unsafe_allow_html=True)
+    # hide_img_fs = '''
+    # <style>
+    # button[title="View fullscreen"]{
+    #     visibility: hidden;}
+    # </style>
+    # '''
+    #
+    # st.markdown(hide_img_fs, unsafe_allow_html=True)
 
     years_list = years
     for year_data in years_list:
