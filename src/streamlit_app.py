@@ -257,8 +257,7 @@ def wrapper_page():
     # st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
-        marker = folium.Marker([lat, lon])
-        st.session_state["markers"] = [marker]
+
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
 
