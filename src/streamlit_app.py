@@ -292,9 +292,9 @@ def more_info():
                     "<p>Løsningen benytter NVE sin API for xgeo.no, som gir data om beregnet snødybde for et gitt punkt. Dette gjorde det enkelt for oss, men er ikke like presist som å bruke målinger fra målestasjoner. Vi bruker Kartverket sin stedsnavn-API for å hente stedsnavn.</p>"
                     "<p>Alt er implementert i Python ved bruk av pakken streamlit. Bruker du Python, så anbefaler vi å prøve den ut. Det er derimot noen svakheter med systemet. Spesielt en vi ikke har klart å løse med en treg markør i kartet. Hvis du vil titte på kildekoden ligger den tilgjengelig på GitHub.</p>"
                     "<p>Hvis du ønsker å ta kontakt, gjør det gjerne gjennom LinkedIn.</p>"
-                    "<p>https://www.linkedin.com/in/andreas-p-lorentzen/</p>"
+                    "<p><a href='https://www.linkedin.com/in/andreas-p-lorentzen/'>https://www.linkedin.com/in/andreas-p-lorentzen/</a></p>"
                     "<p>https://www.linkedin.com/in/pippidis/ </p>"
-                    "<p>God jul<br>PS: Hvis du er en grafisk designer og vil fikse grafikken, så si ifra</p>",
+                    "<p>God jul<br>PS: Hvis du er en grafisk designer og vil gjøre grafikken enda bedre, så si ifra :)</p>",
                     unsafe_allow_html=True)
 
 if __name__ == "__main__":
