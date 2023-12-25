@@ -188,7 +188,7 @@ def wrapper_page():
     list_of_years = []
     if lat is not None:
         with st.status("Henter historiske snøberegninger fra NVE"):
-            for year in range(2023,2000):
+            for year in range(2020,2023):
                 st.write(f"Henter data for {year}")
                 list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
 
