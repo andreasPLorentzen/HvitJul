@@ -285,27 +285,19 @@ def wrapper_page():
             st.snow()
 
 
-        for year in list_of_years:
-            st.write(year.date.year, year.snow_level(), year.sd)
+        # for year in list_of_years:
+        #     st.write(year.date.year, year.snow_level(), year.sd)
 
 
     write_trees(list_of_years)
 
 def write_trees(years=list):
-    # years = {
-    #     2024: 0,
-    #     2023: 2,
-    #     2022: 1,
-    #     2021: 0,
-    #     2020: 0,
-    #     2019: 0,
-    # }
-    years_list = []
+
+    years_list = years
     for year_data in years_list:
         year = year_data.date.year
         condition = year.snow_level()
         depth = year_data.sd #cm
-        # years_list.append((year, category))
 
         st.write(year,condition,depth)
 
