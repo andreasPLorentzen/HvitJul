@@ -257,20 +257,22 @@ def wrapper_page():
     # st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
+        marker = folium.Marker([lat, lon])
+        st.session_state["markers"] = [marker]
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
 
         # update marker in map
         st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
-        marker = folium.Marker([lat, lon])
-        st.session_state["markers"] = [marker]
-        st.write([marker])
+
 
     import time
 
     list_of_years = []
     if lat is not None:
         with st.status("Henter historiske snøberegninger fra NVE"):
+            marker = folium.Marker([lat, lon])
+            st.session_state["markers"] = [marker]
             for year in range(2020,2024).__reversed__():
                 year_data = GridTimeSeriesAPI.get_snow_info(lat,lon,year)
                 if year_data.success == False:
