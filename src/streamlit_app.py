@@ -257,6 +257,8 @@ def wrapper_page():
             for year in range(2020,2024).__reversed__():
                 st.write(f"Henter data for {year}")
                 list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
+            st.write("done! let it snow")
+            st.snow()
 
 
         for year in list_of_years:
