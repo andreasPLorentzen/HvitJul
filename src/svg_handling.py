@@ -164,23 +164,26 @@ def create_svg_grid_test():
       <text style="fill: rgb(183, 183, 183); font-family: Arial, sans-serif; font-size: 9px; font-style: italic; text-anchor: end; white-space: pre;" x="125" y="11.363" transform="matrix(1, 0, 0, 1, 3.552713678800501e-15, 0)">INFO_TEXT</text>
     </svg>
     '''
-    list_of_strings = [
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-        moderate,
-    ]
+    list_of_strings = []
+    for i in range(2000,2023).__reversed__():
+        list_of_strings.append(moderate.replace("YEAR_TEXT", str(i)).replace("SNOW_DEPTH_TEXT", "23 cm"))
+    # list_of_strings = [
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    #     moderate,
+    # ]
     # return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
     top = top.replace("TITLE_TEXT", "Oslo").replace("SUB_TEXT", "Lokasjon bla bla bla")
     info = info.replace("INFO_TEXT", "Laget av Andreas Lorentzen")
