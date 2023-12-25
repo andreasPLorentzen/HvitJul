@@ -102,9 +102,32 @@ def create_svg_grid_test():
     ]
     return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
     # return_string = enhance_svg(return_string,"Oslo", "ostepopp", "Laget av andreas")
+    original_svg_string = '<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg"><!-- SVG content here --></svg>'
+    title = "My SVG Title"
+    return_string = add_title_to_svg(svg_string=original_svg_string,title_text=title)
 
     return return_string
 
+def add_title_to_svg(svg_string, title_text):
+    # Parse the SVG string
+    svg_tree = fromstring(svg_string)
+
+    # Get width from viewBox or width attribute
+    viewbox = svg_tree.get('viewBox')
+    if viewbox:
+        _, _, width, _ = map(float, viewbox.split())
+    else:
+        width = float(svg_tree.get('width', '200'))  # Default fallback if neither viewBox nor width are present
+
+    # Define the title element
+    title_element = f'<text x="{width / 2}" y="20" text-anchor="middle" font-size="14" font-weight="bold">{title_text}</text>'
+
+    # Prepend the title element to the SVG content
+    # fromstring does not parse multiple top level elements, so here we insert into the first element after the opening tag
+    svg_content = tostring(svg_tree, encoding='unicode')
+    svg_with_title = svg_content.replace('>','>' + title_element, 1)
+
+    return svg_with_title
 
 def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_width=2):
     # Parse the SVG string
