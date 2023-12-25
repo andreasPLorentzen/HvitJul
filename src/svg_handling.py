@@ -142,7 +142,7 @@ def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_wi
         "height": str(height - title_offset - info_offset - border_width),
         "fill": "none",
         "stroke": border_color,
-        "stroke-width": border_width
+        "stroke-width": str(border_width)
     })
 
     # Add title
