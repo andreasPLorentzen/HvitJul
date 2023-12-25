@@ -101,7 +101,7 @@ def create_svg_grid_test():
         moderate,
     ]
     return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
-    return_string = enhance_svg(return_string,"Oslo", "ostepopp", "Laget av andreas")
+    # return_string = enhance_svg(return_string,"Oslo", "ostepopp", "Laget av andreas")
 
     return return_string
 
