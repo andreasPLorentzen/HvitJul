@@ -122,7 +122,7 @@ def get_place_name(lat,long):
         "nord": lat,
         "ost": long,
         "koordsys": 4258,
-        "radius": 5000,
+        "radius": 500,
         "fuzzy": "true",
         "utkoordsys": "4258",
         "treffPerSide": "10",
