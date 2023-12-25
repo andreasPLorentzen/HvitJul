@@ -180,9 +180,9 @@ def get_place_name(lat,long):
             st.write(response.json())
             return (closest_name["stedsnavn"][0]["skrivemåte"], closest_name["meterFraPunkt"], (closest_name["representasjonspunkt"]["nord"], closest_name["representasjonspunkt"]["øst"]))
         except:
-            return ("Stedsnavn ikke funnet.", "")
+            return ("Stedsnavn ikke funnet", "", (lat,long))
     else:
-        return ("Ikke noe sted valgt.", "")
+        return ("Ikke noe sted valgt.", "", (lat,long))
 
 def get_place_name_as_markdown(lat,long):
 
