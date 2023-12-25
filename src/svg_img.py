@@ -44,6 +44,7 @@ class image_generation:
             "SNOW_LEVEL_ERROR",
             "SNOW_LEVEL_NONE",
             "SNOW_LEVEL_TRACE",
+            "SNOW_LEVEL_LITE",
             "SNOW_LEVEL_LOW",
             "SNOW_LEVEL_MODERATE",
             "SNOW_LEVEL_TRACE",
