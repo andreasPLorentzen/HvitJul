@@ -131,13 +131,41 @@ def get_place_name(lat,long):
 
     while True:
 
-
         response = requests.get(base_url, params=params)
         if response.status_code == 200:
             if len(response.json()["navn"]) >= 1:
+                data = response.json()["navn"]
                 break
         params["radius"] *= 2
         st.write(params["radius"], "meter...")
+
+        if params["radius"] > 100000:
+            data =  [
+                        {
+                            "meterFraPunkt": 0,
+                            "navneobjekttype": "Adressenavn",
+                            "representasjonspunkt": {
+                                "koordsys": 4258,
+                                "nord": long,
+                                "øst": lat,
+                               },
+                            "stedsnavn": [
+                                 {
+                                     "navnestatus": "hovednavn",
+                                     "skrivemåte": "Stedsnvan ikke funnet",
+                                     "skrivemåtestatus":"vedtatt",
+                                     "språk": "Norsk",
+                                     "stedsnavnnummer": 1
+                                },
+                            ],
+                            "stedsnummer": 987210,
+                            "stedstatus": "aktiv",
+                    },
+             ]
+
+            break
+
+
 
     if response.status_code == 200:
         try:
@@ -161,8 +189,8 @@ def get_place_name_as_markdown(lat,long):
     navn,kommune,coords = get_place_name(lat,long)
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
-         f'<p style="font-size: 1.5em; font-weight: italic; margin-left: 10px; display: inline;">{kommune} meter fra valgt punkt</p>'\
-         f'<br/><p style="font-size: 1em; font-weight: italic; display: inline;">{round(coords[1],2)}° øst, {round(coords[0])}° nord</p>'
+         f'<p style="font-size: 1.2em; font-weight: italic; margin-left: 10px; display: inline;">{kommune} meter fra valgt punkt</p>'\
+         f'<br/><p style="font-size: 1em; font-weight: italic; display: inline;">{round(coords[1],2)}° øst, {round(coords[0]),2}° nord</p>'
 
 
     return html
