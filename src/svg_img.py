@@ -35,9 +35,12 @@ class image_generation:
 
 
         # alter top and info
+        st.write(self.images["TOP"])
         top = self.images["TOP"]
+        st.write(top)
         top.replace("TITLE_TEXT", title)
         top.replace("SUB_TEXT", sub_title)
+        st.write(top)
         info = self.images["INFO"]
         info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen")
         # generate image:
