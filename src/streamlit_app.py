@@ -4,6 +4,7 @@ from folium.plugins import Draw
 from streamlit_folium import st_folium
 from src.gts_api import GridTimeSeriesAPI
 from src.svg_img import image_generation
+import socket
 
 from .utils import polygon_from_point
 import random, requests
@@ -224,7 +225,10 @@ def place_querey():
 
 def wrapper_page():
     st.set_page_config(page_title="Var det en hvit jul?", page_icon="./Graphics/SNOW_1.png")
+    hostname = socket.gethostname()
 
+    ip_address = socket.gethostbyname(hostname)
+    st.write(hostname, ip_address)
     lat = None
     lon = None
 
