@@ -223,8 +223,13 @@ def place_querey():
     # st.write(test)
 
 def wrapper_page():
+<<<<<<< HEAD
     st.set_page_config(page_title="Var det en hvit jul?")
     st.set_page_config(page_icon="./Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg")
+=======
+    # st.set_page_config(layout="wide")
+    st.set_page_config(page_title="Var det en hvit jul?", page_icon="./Graphics/SNOW_1.png")
+>>>>>>> origin/main
     lat = None
     lon = None
 
