@@ -135,15 +135,15 @@ def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_wi
             element.set("transform", f"translate(0,{title_offset})")
 
     # Create a red border rectangle
-    border_rect = SubElement(svg_tree, "rect", {
-        "x": str(border_offset),
-        "y": str(border_offset + title_offset),
-        "width": str(width - border_width),
-        "height": str(height - title_offset - info_offset - border_width),
-        "fill": "none",
-        "stroke": border_color,
-        "stroke-width": str(border_width)
-    })
+    # border_rect = SubElement(svg_tree, "rect", {
+    #     "x": str(border_offset),
+    #     "y": str(border_offset + title_offset),
+    #     "width": str(width - border_width),
+    #     "height": str(height - title_offset - info_offset - border_width),
+    #     "fill": "none",
+    #     "stroke": border_color,
+    #     "stroke-width": str(border_width)
+    # })
 
     # Add title
     title_text = SubElement(svg_tree, "text", {
@@ -256,5 +256,5 @@ if __name__ == "__main__":
 
     print(create_svg_grid_test())
 
-    file_paths = [r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg'] # Replace with your actual file paths
-    create_svg_grid(file_paths,images_per_row=4)
+    # file_paths = [r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_MODERATE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_TRACE.svg', r'C:\00_GIT\HvitJul\Graphics/svg_parts/SNOW_LEVEL_NONE.svg'] # Replace with your actual file paths
+    # create_svg_grid(file_paths,images_per_row=4)
