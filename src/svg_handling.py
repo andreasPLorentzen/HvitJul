@@ -100,7 +100,7 @@ def create_svg_grid_test():
         moderate,
         moderate,
     ]
-    return_string = create_svg_grid_str(list_of_strings,images_per_row=10)
+    return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
     return return_string
 
 moderate = '''
