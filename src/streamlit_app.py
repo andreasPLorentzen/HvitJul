@@ -230,6 +230,31 @@ def wrapper_page():
             "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
             "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
+
+    #testing image
+    from .svg_handling import create_svg_grid_test
+    svg = create_svg_grid_test()
+    st.image(svg)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     #setting state
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
