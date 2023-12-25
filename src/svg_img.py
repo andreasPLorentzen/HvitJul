@@ -103,7 +103,7 @@ class image_generation:
         if svg_strings == []:
             return ""
 
-        top_height = 75
+        top_height = 100
         # Assume the viewBox dimensions represent svg_width and svg_height (fallback default size)
         svg_width, svg_height = 100, 150
 
