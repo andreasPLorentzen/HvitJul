@@ -154,7 +154,7 @@ class image_generation:
             "x": str(border_width / 2),
             "y": str(border_width / 2 + top_height),
             "width": str(output_width),
-            "height": str(output_height),
+            "height": str(output_height + top_height),
             "fill": "#F0F5FC",
             "stroke": "#D1EBE1",
             "stroke-width": str(border_width)
