@@ -230,13 +230,19 @@ def wrapper_page():
             "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
             "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
+    #setting state
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
-    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
 
+    # defining map
+    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
     fg = folium.FeatureGroup(name="Markers")
+
+    # adding markers
     for marker in st.session_state["markers"]:
         fg.add_child(marker)
+
+    # drawing map
     data = st_folium(m, height=300, width=750)
 
     # if data.get("last_clicked"):
@@ -252,6 +258,8 @@ def wrapper_page():
     if data["last_clicked"] is not None:
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
+
+        # update marker in map
         st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
         marker = folium.Marker([lat, lon])
         st.session_state["markers"] = [marker]
