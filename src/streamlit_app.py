@@ -176,7 +176,7 @@ def get_place_name(lat,long) -> (str, str, (float, float)):
         except:
             pass
 
-    return ("Stedsnvan ikke funnet", "", (lat,long))
+    return ("Stedsnavn ikke funnet", "", (lat,long))
 
 def get_place_name_as_markdown(lat,long) -> str:
     '''
