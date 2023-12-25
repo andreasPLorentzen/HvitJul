@@ -303,7 +303,7 @@ def write_trees(years=list):
     years_list = []
     for year_data in years_list:
         year = year_data.date.year
-        conditions = year.snow_level()
+        condition = year.snow_level()
         depth = year_data.sd #cm
         # years_list.append((year, category))
 
