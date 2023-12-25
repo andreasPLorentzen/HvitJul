@@ -28,8 +28,8 @@ class image_generation:
             # st.write("SNOW_LEVEL_" + condition in self.images.keys())
             # st.write(self.images["SNOW_LEVEL_" + condition])
             tree_image = f'{self.images["SNOW_LEVEL_" + condition]}'
-            tree_image.replace("YEAR_TEXT", str(year))
-            tree_image.replace("SUB_TEXT", str(depth))
+            tree_image = str(tree_image.replace("YEAR_TEXT", str(year)))
+            tree_image = str(tree_image.replace("SUB_TEXT", str(depth)))
             svg_list.append(tree_image)
             # svg_list.append(self._alter_text_in_image(self.images["SNOW_LEVEL_" + condition], year=year,snow_depth=depth))
 
@@ -39,8 +39,9 @@ class image_generation:
         top = str(self.images["TOP"])
         st.write(".....")
         st.write(top)
-        top = str(top.replace("TITLE_TEXT", "CAKE?"))
-        top.replace("SUB_TEXT", sub_title)
+        top = str(top.replace("SUBTITLE_TEXT", sub_title))
+        top = str(top.replace("TITLE_TEXT", title))
+
         st.write(".....")
         st.write(top)
         info = self.images["INFO"]
