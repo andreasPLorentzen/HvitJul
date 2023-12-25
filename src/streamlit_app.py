@@ -275,7 +275,7 @@ def main_page():
 
     list_of_years = []
     if lat is not None:
-        earliest_year = st.date_input(format="YYYY",min_value=datetime.date(year=1973),value=datetime.date(year=this_year - 14))
+        earliest_year = st.date_input(format="YYYY",min_value=datetime.date(year=1973,month=1,day=1),value=datetime.date(year=this_year - 14,month=1,day=1))
         st.write(earliest_year)
         with st.status("Henter historiske snøberegninger fra NVE"):
             marker = folium.Marker([lat, lon])
