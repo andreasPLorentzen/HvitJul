@@ -312,7 +312,7 @@ def write_trees(years=list):
     for row in range(0,3):
         col1,col2,col3,col4,col5,col6,col7,col8,col9,col10 = st.columns(10,gap="small")
         cols = [col1,col2,col3,col4,col5,col6,col7,col8,col9,col10]
-        i = 2023
+        i = "2023\n 35cm"
         for col in cols:
             with col:
                 st.image(f"Graphics/SNOW_{random.randint(0,2)}.png", caption=i,use_column_width="always")
