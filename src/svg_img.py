@@ -1,4 +1,5 @@
 from .snow_data import SnowData
+from .snow_level import SnowLevel
 import streamlit as st
 
 
@@ -19,7 +20,10 @@ class image_generation:
             # st.write(year_obj)
             year = year_obj.date.year
             condition = str(year_obj.snow_level().name)
-            depth = f"{year_obj.sd} cm"  # cm
+            if not year_obj.snow_level() is SnowLevel.ERROR:
+                depth = f"{year_obj.sd} cm"  # cm
+            else:
+                depth = f"ingen data"  # cm
 
             tree_image = f'{self.images["SNOW_LEVEL_" + condition]}'
             tree_image = str(tree_image.replace("YEAR_TEXT", str(year)))
