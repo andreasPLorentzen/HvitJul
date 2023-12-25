@@ -9,7 +9,7 @@ import requests
 # MAP settings
 INPUT_MAP_CENTER = [60.0, 10.0]
 INPUT_MAP_WIDTH = 750
-INPUT_MAP_HEIGHT = 600
+INPUT_MAP_HEIGHT = 400
 INPUT_MAP_ZOOM = 8
 
 
@@ -235,9 +235,9 @@ def main_page():
     lat = None
     lon = None
     st.markdown(
-        "Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
-        "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
-        "", unsafe_allow_html=True)
+        "<p>Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å diskutere på hvor ofte det egentlig var en hvit jul i Oslo? eller Bergen? Vi ble ikke helt enige og siden vi strengt talt ikke hadde bedre ting å gjøre mellom turer på ski og julemat, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.</p>"
+        "<p>Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.</p>"
+        "<p>Når du trykker i kartet, starter applikasjonen å hente data om snøforhold fra NVE og sjekker hvordan var snøforholdene akkurat der.</p>", unsafe_allow_html=True)
     st.subheader("Trykk i kartet for å se hvor mye snø det har vært i jula")
 
     # setting state
@@ -282,6 +282,9 @@ def main_page():
         st.snow()
         image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name} {coords}")
         st.image(image.result_image, output_format="PNG")
+        st.markdown(
+            "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>"
+            unsafe_allow_html=True)
 
 
 def more_info():
