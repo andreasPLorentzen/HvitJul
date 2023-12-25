@@ -287,9 +287,15 @@ def more_info():
     :return:
     '''
     with st.expander("Les mer om prosjektet", expanded=False):
-        st.markdown("Denne løsningen var et hobbyprosjekt i jula 2023 av Andreas P. Lorentzen og Johannes P. Lorentzen som startet i en diskusjon og endte med implementasjon. Vi håper at du og dere liker løsningen, og at det kanskje hjelper med å løse en diskusjon hos dere også. "
-                    "<br><br>Løsningen benytter NVE sin API for xgeo.no, som gir data om beregnet snødybde for et gitt punkt. Dette gjorde det enkelt for oss, men er ikke like presist som å bruke målinger fra målestasjoner. "
-                    "<p>Vi bruker Kartverket sin stedsnavn-API for å hente stedsnavn. Alt er implementert i Python ved bruk av pakken streamlit. Bruker du Python, så anbefaler vi å prøve den ut. Det er derimot noen svakheter med systemet. Spesielt en vi ikke har klart å løse med en treg markør i kartet. Hvis du vil titte på kildekoden ligger den tilgjengelig på GitHub.</p>",unsafe_allow_html=True)
+        st.subheader("Om prosjektet")
+        st.markdown("<p>Denne løsningen var et hobbyprosjekt i jula 2023 av Andreas P. Lorentzen og Johannes P. Lorentzen som startet i en diskusjon og endte med implementasjon. Vi håper at du og dere liker løsningen, og at det kanskje hjelper med å løse en diskusjon hos dere også.</p> "
+                    "<p>Løsningen benytter NVE sin API for xgeo.no, som gir data om beregnet snødybde for et gitt punkt. Dette gjorde det enkelt for oss, men er ikke like presist som å bruke målinger fra målestasjoner. Vi bruker Kartverket sin stedsnavn-API for å hente stedsnavn.</p>"
+                    "<p>Alt er implementert i Python ved bruk av pakken streamlit. Bruker du Python, så anbefaler vi å prøve den ut. Det er derimot noen svakheter med systemet. Spesielt en vi ikke har klart å løse med en treg markør i kartet. Hvis du vil titte på kildekoden ligger den tilgjengelig på GitHub.</p>"
+                    "<p>Hvis du ønsker å ta kontakt, gjør det gjerne gjennom LinkedIn.</p>"
+                    "<p>https://www.linkedin.com/in/andreas-p-lorentzen/</p>"
+                    "<p>https://www.linkedin.com/in/pippidis/ </p>"
+                    "<p>God jul<br>PS: Hvis du er en grafisk designer og vil fikse grafikken, så si ifra</p>",
+                    unsafe_allow_html=True)
 
 if __name__ == "__main__":
     wrapper_page()
