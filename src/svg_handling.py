@@ -137,16 +137,16 @@ def create_svg_grid_str_v2(svg_strings, top_svg_string, info_svg_string, images_
     })
 
     # Create alternating background rectangles
-    colors = ["white", "red"]
-    for i in range(2):
-        background_rect = SubElement(output_svg, "rect", {
-            "x": str(border_width / 2),
-            "y": str(border_width / 2 + top_height),
-            "width": str(output_width),
-            "height": str(output_height),
-            "fill": colors[i],
-            "stroke": "black",
-            "stroke-width": str(border_width)
+    # colors = ["#D1EBE1"]
+    # for i in range(2):
+    background_rect = SubElement(output_svg, "rect", {
+        "x": str(border_width / 2),
+        "y": str(border_width / 2 + top_height),
+        "width": str(output_width),
+        "height": str(output_height),
+        "fill": "#D1EBE1",
+        "stroke": "black",
+        "stroke-width": str(border_width)
         })
 
 
