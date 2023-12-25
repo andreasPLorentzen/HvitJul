@@ -289,7 +289,7 @@ def wrapper_page():
             st.write("done! let it snow")
 
         st.snow()
-        image = image_generation(list_of_years, name, coords)
+        image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name} {coords}")
         # st.write(image.result_image)
         st.image(image.result_image, output_format="PNG")
 
