@@ -248,7 +248,7 @@ def wrapper_page():
         fg.add_child(marker)
 
     # drawing map
-    data = st_folium(m, height=300, width=750, key="new", feature_group_to_add=fg)
+    data = st_folium(m, height=400, width=750, key="new", feature_group_to_add=fg)
 
     # if data.get("last_clicked"):
     #     marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
@@ -291,7 +291,7 @@ def wrapper_page():
         st.snow()
         image = image_generation(list_of_years, name, coords)
         # st.write(image.result_image)
-        st.image(image.result_image)
+        st.image(image.result_image, output_format="PNG")
 
 def write_trees(years=list):
 
