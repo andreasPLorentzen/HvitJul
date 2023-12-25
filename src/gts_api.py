@@ -19,6 +19,17 @@ GTS_RELEVANT_INFORMATION = {
     #'qsw':'snow_melt_last_day',
 }
 
+class APIError(Exception):
+    """An API Error Exception"""
+
+    def __init__(self, status):
+        self.status = status
+
+    def __str__(self):
+        return "APIError: status={}".format(self.status)
+
+
+
 class GridTimeSeriesAPI:
     '''Contains functionality to ask the GTS API
         See: https://api.nve.no/doc/gridtimeseries-data-gts
@@ -40,6 +51,8 @@ class GridTimeSeriesAPI:
                     response_dict = json.loads(response.text)
                     data = mean(response_dict['Data'])
                     wd.set_value(data_type, data)
+                else:
+                    raise APIError('NO 200 RESPONSE')
             wd.success = True
         except Exception as e:
             print(e)
