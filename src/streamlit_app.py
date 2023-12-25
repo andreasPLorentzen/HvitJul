@@ -13,10 +13,12 @@ INPUT_MAP_WIDTH = 1000
 INPUT_MAP_HEIGHT = 600
 INPUT_MAP_ZOOM = 8
 
+
+
 def draw_trip_in_map():
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
-    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False,)
+    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
 
 
     # NOT REALLY A GOOD WAY, but all other attempts seems to fail...
@@ -71,13 +73,6 @@ def draw_trip_in_map():
     if data.get("last_clicked"):
         marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
         st.session_state["markers"] = [marker]
-    #
-
-
-
-
-
-
 
 
     return data
@@ -204,18 +199,8 @@ def placenames_options(querey):
     return get_x_first_place_names(querey)[0]
 
 
-
-
-
-def wrapper_page():
-    # st.set_page_config(layout="wide")
-    lat = None
-    lon = None
-
-    st.title("Hvor hvit er egentlig jula?")
-    st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
-            "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
-            "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
+def place_querey():
+    pass
 
     # place_query = st.text_input("Enter a place name", "")
     # if place_query:
@@ -235,32 +220,53 @@ def wrapper_page():
     # test = st.selectbox("Søk på stedsnavn", placenames_options(test))
     # st.write(test)
 
-    data = draw_trip_in_map()
+def wrapper_page():
+    # st.set_page_config(layout="wide")
+    lat = None
+    lon = None
+
+    st.title("Hvor hvit er egentlig jula?")
+    st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
+            "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
+            "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
+
+    if "markers" not in st.session_state:
+        st.session_state["markers"] = []
+    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
+
+    fg = folium.FeatureGroup(name="Markers")
+    for marker in st.session_state["markers"]:
+        fg.add_child(marker)
+    data = st_folium(m, height=300, width=750)
+
+    # if data.get("last_clicked"):
+    #     marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
+    #     st.session_state["markers"] = [marker]
+
+
+
+    # data = draw_trip_in_map()
     # st.write(data)
     # st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
-        # polygon =polygon_from_point(data["last_clicked"]["lat"], data["last_clicked"]["lng"], 1)
-        # st.write(polygon)
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
-        # location_name = get_place_name(data["last_clicked"]["lat"], data["last_clicked"]["lng"])
-        # st.header(f"{location_name}")
         st.markdown(get_place_name_as_markdown(lat,lon),unsafe_allow_html=True)
-        # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2023))
-        # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
+        marker = folium.Marker([lat, lon])
+        st.session_state["markers"] = [marker]
+
     import time
 
     list_of_years = []
     if lat is not None:
         with st.status("Henter historiske snøberegninger fra NVE"):
             for year in range(2020,2024).__reversed__():
-
                 year_data = GridTimeSeriesAPI.get_snow_info(lat,lon,year)
                 if year_data.success == False:
                     st.write(f"Feil med data for {year}")
                 else:
-                    st.write(f"Henter data for {year}")
+                    st.write(f"Hentet data for {year}")
                 list_of_years.append(year_data)
             st.write("done! let it snow")
             st.snow()
