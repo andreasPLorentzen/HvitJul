@@ -60,12 +60,12 @@ def draw_trip_in_map():
     fg = folium.FeatureGroup(name="Markers")
     for marker in st.session_state["markers"]:
         fg.add_child(marker)
-    # if data["last_clicked"] is not None:
-    #     folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]]).add_to(m)
+
 
 
     # data = st_folium(f_m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH,  feature_group_to_add=fg, key="new")
     data = st_folium(m, height=300, width=750)
+
     # data =  st_folium(m)
     # # if data["last_clicked"] is not None:
     if data.get("last_clicked"):
@@ -251,16 +251,16 @@ def wrapper_page():
         # st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
     import time
 
-    # list_of_years = []
-    # if lat is not None:
-    #     with st.status("Henter historiske snøberegninger fra NVE"):
-    #         for year in range(2020,2024).__reversed__():
-    #             st.write(f"Henter data for {year}")
-    #             list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
-    #
-    #
-    #     for year in list_of_years:
-    #         st.write(year.date.year, year.snow_level(), year.sd)
+    list_of_years = []
+    if lat is not None:
+        with st.status("Henter historiske snøberegninger fra NVE"):
+            for year in range(2020,2024).__reversed__():
+                st.write(f"Henter data for {year}")
+                list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
+
+
+        for year in list_of_years:
+            st.write(year.date.year, year.snow_level(), year.sd)
 
 
     # write_trees({"ost":1})
