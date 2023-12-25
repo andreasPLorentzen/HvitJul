@@ -104,7 +104,8 @@ def create_svg_grid_test():
     # return_string = enhance_svg(return_string,"Oslo", "ostepopp", "Laget av andreas")
     original_svg_string = '<svg width="200" height="100" xmlns="http://www.w3.org/2000/svg"><!-- SVG content here --></svg>'
     title = "My SVG Title"
-    return_string = add_title_to_svg(svg_string=original_svg_string,title_text=title)
+    # return_string = add_title_to_svg(svg_string=return_string,title_text=title)
+    return_string = add_marginalia_to_svg(return_string,"Oslo", "wooop", "Andreas shøjæ")
 
     return return_string
 
@@ -125,6 +126,7 @@ def add_title_to_svg(svg_string, title_text):
     # Prepend the title element to the SVG content
     # fromstring does not parse multiple top level elements, so here we insert into the first element after the opening tag
     svg_content = tostring(svg_tree, encoding='unicode')
+    print(svg_content)
     svg_with_title = svg_content.replace('>','>' + title_element, 1)
 
     return svg_with_title
@@ -201,6 +203,69 @@ def enhance_svg(svg_string, title, subtitle, info, border_color="red", border_wi
 
     # Return the updated SVG as a string
     return tostring(svg_tree, xml_declaration=True, encoding='utf-8', method='xml').decode()
+
+def add_marginalia_to_svg(svg_string, title, subtitle, info_text):
+    svg = fromstring(svg_string)
+
+    # Get width and height from viewBox or width/height attributes
+    viewbox = svg.get('viewBox')
+    if viewbox:
+        _, _, width, _ = map(float, viewbox.split())
+    else:
+        width = float(svg.get('width', '200'))  # Default fallback width if no viewBox present
+        height = float(svg.get('height', '200'))  # Default fallback height
+
+    # Transformation to consider title and subtitle height
+    title_height = 40
+    subtitle_height = 20
+
+    # Update SVG height to add space for title and subtitle
+    if viewbox:
+        svg.set('viewBox', f'0 0 {width} {height + title_height + subtitle_height}')
+    else:
+        svg.set('height', str(height + title_height + subtitle_height))
+
+    # Append title text
+    title_text = Element('text', {
+        'x': str(width / 2),
+        'y': str(title_height),
+        'font-family': 'Arial',
+        'font-size': '40',
+        'font-weight': 'bold',
+        'text-anchor': 'middle',
+        'fill': 'black'  # Adjust as needed
+    })
+    title_text.text = title
+
+    # Append subtitle text
+    subtitle_text = Element('text', {
+        'x': str(width / 2),
+        'y': str(title_height + subtitle_height),
+        'font-family': 'Arial',
+        'font-size': '20',
+        'text-anchor': 'middle',
+        'fill': 'black'  # Adjust as needed
+    })
+    subtitle_text.text = subtitle
+
+    # Info text
+    info_text_element = Element('text', {
+        'x': str(width),
+        'y': str(height + title_height + subtitle_height - 10),  # 10 is the arbitrary margin
+        'font-family': 'Arial',
+        'font-size': '10',
+        'text-anchor': 'end',
+        'fill': 'gray'
+    })
+    info_text_element.text = info_text
+
+    # Insert the new elements into the existing SVG
+    svg.insert(0, info_text_element)
+    svg.insert(0, subtitle_text)
+    svg.insert(0, title_text)
+
+    # Return updated SVG as a string
+    return tostring(svg, encoding='unicode')
 
 moderate = '''
 <svg viewBox="0.399 2.635 100.195 124.401" width="100.195" height="124.401" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
