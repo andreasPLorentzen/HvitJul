@@ -183,18 +183,19 @@ def wrapper_page():
         st.write(GridTimeSeriesAPI.get_snow_info(lat, lon, 2022))
     import time
 
-
+    list_of_years = []
 
     with st.status("Henter historiske snøberegninger fra NVE"):
-        time.sleep(1)
-        st.write("2023")
-        time.sleep(1)
-        st.write("2022")
-        time.sleep(1)
-        st.write("2021")
+        for year in range(2023,2000):
+            st.write(f"Henter data for {year}")
+            list_of_years.append(GridTimeSeriesAPI.get_snow_info(lat,lon,year))
 
 
-    write_trees({"ost":1})
+    for year in list_of_years:
+        st.write(year.as_dict())
+
+
+    # write_trees({"ost":1})
 
 def write_trees(years=dict):
     years = {
