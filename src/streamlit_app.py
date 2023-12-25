@@ -216,7 +216,7 @@ def wrapper_page():
     st.title("Hvor hvit er egentlig jula?")
     st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen? <br/>"
             "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/>"
-            "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True))
+            "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
     place_query = st.text_input("Enter a place name", "")
     if place_query:
