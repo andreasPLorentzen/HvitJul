@@ -222,24 +222,31 @@ def place_querey():
 
 def wrapper_page():
     st.set_page_config(page_title="Var det en hvit jul?", page_icon="./Graphics/SNOW_1.png")
+    main, about = st.tabs(["Var det en hvit jul?", "Om prosjektet"])
+    st.title("Var det en hvit jul?")
+    with main:
+        main_page()
+
+    with about:
+        more_info()
+
+
+def main_page():
     lat = None
     lon = None
-
-    st.title("Var det en hvit jul?")
-    st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
-            "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
-            "",unsafe_allow_html=True)
+    st.markdown(
+        "Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
+        "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
+        "", unsafe_allow_html=True)
     st.subheader("Trykk i kartet for å se hvor mye snø det har vært i jula")
 
-
-    #setting state
+    # setting state
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
 
     # defining map
     m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False, )
     fg = folium.FeatureGroup(name="Markers")
-
 
     # adding markers
     for marker in st.session_state["markers"]:
@@ -248,26 +255,23 @@ def wrapper_page():
     # drawing map
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH, key="new", feature_group_to_add=fg)
 
-
     if data["last_clicked"] is not None:
-
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
         marker = folium.Marker([lat, lon])
         st.session_state["markers"] = [marker]
 
         # update marker in map
-        markdown, name, distance, coords = get_place_name_as_markdown(lat,lon)
-        st.markdown(markdown,unsafe_allow_html=True)
-
+        markdown, name, distance, coords = get_place_name_as_markdown(lat, lon)
+        st.markdown(markdown, unsafe_allow_html=True)
 
     list_of_years = []
     if lat is not None:
         with st.status("Henter historiske snøberegninger fra NVE"):
             marker = folium.Marker([lat, lon])
             st.session_state["markers"] = [marker]
-            for year in range(2010,2024).__reversed__():
-                year_data = GridTimeSeriesAPI.get_snow_info(lat,lon,year)
+            for year in range(2010, 2024).__reversed__():
+                year_data = GridTimeSeriesAPI.get_snow_info(lat, lon, year)
                 if year_data.success == False:
                     st.write(f"Feil med data for {year}")
                 else:
@@ -279,7 +283,6 @@ def wrapper_page():
         image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name} {coords}")
         st.image(image.result_image, output_format="PNG")
 
-    more_info()
 
 def more_info():
     '''
@@ -292,8 +295,8 @@ def more_info():
                     "<p>Løsningen benytter NVE sin API for xgeo.no, som gir data om beregnet snødybde for et gitt punkt. Dette gjorde det enkelt for oss, men er ikke like presist som å bruke målinger fra målestasjoner. Vi bruker Kartverket sin stedsnavn-API for å hente stedsnavn.</p>"
                     "<p>Alt er implementert i Python ved bruk av pakken streamlit. Bruker du Python, så anbefaler vi å prøve den ut. Det er derimot noen svakheter med systemet. Spesielt en vi ikke har klart å løse med en treg markør i kartet. Hvis du vil titte på kildekoden ligger den tilgjengelig på GitHub.</p>"
                     "<p>Hvis du ønsker å ta kontakt, gjør det gjerne gjennom LinkedIn.</p>"
-                    "<p><a href='https://www.linkedin.com/in/andreas-p-lorentzen/'>https://www.linkedin.com/in/andreas-p-lorentzen/</a></p>"
-                    "<p>https://www.linkedin.com/in/pippidis/ </p>"
+                    "<p>Andreas: <a href='https://www.linkedin.com/in/andreas-p-lorentzen/'>https://www.linkedin.com/in/andreas-p-lorentzen</a></p>"
+                    "<p>Johannes: <a https://www.linkedin.com/in/pippidis/'>https://www.linkedin.com/in/pippidis</a></p>"
                     "<p>God jul<br>PS: Hvis du er en grafisk designer og vil gjøre grafikken enda bedre, så si ifra :)</p>",
                     unsafe_allow_html=True)
 
