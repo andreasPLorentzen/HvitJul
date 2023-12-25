@@ -231,7 +231,7 @@ def wrapper_page():
             "",unsafe_allow_html=True)
     st.subheader("Trykk i kartet for å se hvor mye snø det har vært i jula")
 
-    more_info()
+
     #setting state
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
@@ -279,13 +279,15 @@ def wrapper_page():
         image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name} {coords}")
         st.image(image.result_image, output_format="PNG")
 
+    more_info()
+
 def more_info():
     '''
     just writes some more info
     :return:
     '''
     with st.expander("Les mer om prosjektet", expanded=False):
-        st.markdown("Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
+        st.markdown("Denne løsningen var et hobbyprosjekt i jula 2023 av Andreas P. Lorentzen og Johannes P. Lorentzen som startet i en diskusjon og endte med implementasjon. Vi håper at du og dere liker løsningen, og at det kanskje hjelper med å løse en diskusjon hos dere også. Løsningen benytter NVE sin API for xgeo.no, som gir data om beregnet snødybde for et gitt punkt. Dette gjorde det enkelt for oss, men er ikke like presist som å bruke målinger fra målestasjoner. Vi bruker Kartverket sin stedsnavn-API for å hente stedsnavn. Alt er implementert i Python ved bruk av pakken streamlit. Bruker du Python, så anbefaler vi å prøve den ut. Det er derimot noen svakheter med systemet. Spesielt en vi ikke har klart å løse med en treg markør i kartet. Hvis du vil titte på kildekoden ligger den tilgjengelig på GitHub.",unsafe_allow_html=True)
 
 if __name__ == "__main__":
     wrapper_page()
