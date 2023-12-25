@@ -35,9 +35,9 @@ class image_generation:
         top = str(top.replace("TITLE_TEXT", title))
 
         info = self.images["INFO"]
-        info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen")
+        info = str(info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen"))
         # generate image:
-        self.result_image = self._create_svg_grid_str(svg_list,top,info,images_per_row=5)
+        self.result_image = self._create_svg_grid_str(svg_list,top,info,images_per_row=7)
 
     def _load_svg(self):
         filenames = [

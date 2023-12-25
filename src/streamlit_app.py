@@ -233,30 +233,6 @@ def wrapper_page():
             "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
 
-    # #testing image
-    # from .svg_handling import create_svg_grid_test
-    # svg = create_svg_grid_test()
-    # st.image(svg)
-    #
-    #
-    #
-    #
-    #
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #setting state
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
@@ -311,9 +287,9 @@ def wrapper_page():
             st.write("done! let it snow")
             st.snow()
 
-
-
-    write_trees(list_of_years)
+        image = image_generation(list_of_years, "TEST", "VIRKELIG")
+        # st.write(image.result_image)
+        st.image(image.result_image)
 
 def write_trees(years=list):
 
