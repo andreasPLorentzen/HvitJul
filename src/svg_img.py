@@ -24,10 +24,14 @@ class image_generation:
             st.write(self.images.keys())
             # alter the svg
 
-            st.write("SNOW_LEVEL_" + condition)
-            st.write("SNOW_LEVEL_" + condition in self.images.keys())
-            st.write(self.images["SNOW_LEVEL_" + condition])
-            svg_list.append(self._alter_text_in_image(self.images["SNOW_LEVEL_" + condition], year=year,snow_depth=depth))
+            # st.write("SNOW_LEVEL_" + condition)
+            # st.write("SNOW_LEVEL_" + condition in self.images.keys())
+            # st.write(self.images["SNOW_LEVEL_" + condition])
+            tree_image = self.images["SNOW_LEVEL_" + condition]
+            tree_image.replace("YEAR_TEXT", str(year))
+            tree_image.replace("SUB_TEXT", str(depth))
+            svg_list.append(tree_image)
+            # svg_list.append(self._alter_text_in_image(self.images["SNOW_LEVEL_" + condition], year=year,snow_depth=depth))
 
 
         # alter top and info
