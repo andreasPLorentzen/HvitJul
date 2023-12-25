@@ -122,14 +122,22 @@ def get_place_name(lat,long):
         "nord": lat,
         "ost": long,
         "koordsys": 4258,
-        "radius": 500,
+        "radius": 100,
         "fuzzy": "true",
         "utkoordsys": "4258",
         "treffPerSide": "10",
         "side": "1"
     }
 
-    response = requests.get(base_url, params=params)
+    while True:
+
+
+        response = requests.get(base_url, params=params)
+        if response.status_code == 200:
+            if len(response.json()["navn"]) >= 1:
+                break
+        params["radius"] *= 2
+        st.write(params["radius"], "meter...")
 
     if response.status_code == 200:
         try:
