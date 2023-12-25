@@ -43,7 +43,7 @@ class image_generation:
 
         url = self.images["URL"]
         # generate image:
-        self.result_image = self._create_svg_grid_str(svg_list,top,info,images_per_row=7)
+        self.result_image = self._create_svg_grid_str(svg_list,top,info, url, images_per_row=7)
 
     def _load_svg(self):
         filenames = [
