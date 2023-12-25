@@ -4,14 +4,11 @@ from folium.plugins import Draw
 from streamlit_folium import st_folium
 from src.gts_api import GridTimeSeriesAPI
 from src.svg_img import image_generation
-import socket
-
-from .utils import polygon_from_point
-import random, requests
+import requests
 
 # MAP settings
 INPUT_MAP_CENTER = [60.0, 10.0]
-INPUT_MAP_WIDTH = 1000
+INPUT_MAP_WIDTH = 750
 INPUT_MAP_HEIGHT = 600
 INPUT_MAP_ZOOM = 8
 
@@ -225,19 +222,16 @@ def place_querey():
 
 def wrapper_page():
     st.set_page_config(page_title="Var det en hvit jul?", page_icon="./Graphics/SNOW_1.png")
-    hostname = socket.gethostname()
-
-    ip_address = socket.gethostbyname(hostname)
-    st.write(hostname, ip_address)
     lat = None
     lon = None
 
     st.title("Hvor hvit er egentlig jula?")
     st.markdown("Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å lure på hvor ofte var det egentlig en hvit jul i Oslo? eller Bergen?"
             "Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.<br/><br/>"
-            "Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
+            "",unsafe_allow_html=True)
+    st.subheader("Trykk i kartet for å se hvor mye snø det har vært i jula")
 
-
+    more_info()
     #setting state
     if "markers" not in st.session_state:
         st.session_state["markers"] = []
@@ -252,17 +246,8 @@ def wrapper_page():
         fg.add_child(marker)
 
     # drawing map
-    data = st_folium(m, height=400, width=750, key="new", feature_group_to_add=fg)
+    data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH, key="new", feature_group_to_add=fg)
 
-    # if data.get("last_clicked"):
-    #     marker = folium.Marker([data["last_clicked"]["lat"], data["last_clicked"]["lng"]])
-    #     st.session_state["markers"] = [marker]
-
-
-
-    # data = draw_trip_in_map()
-    # st.write(data)
-    # st.write(data["last_clicked"])
 
     if data["last_clicked"] is not None:
 
@@ -276,8 +261,6 @@ def wrapper_page():
         st.markdown(markdown,unsafe_allow_html=True)
 
 
-    import time
-
     list_of_years = []
     if lat is not None:
         with st.status("Henter historiske snøberegninger fra NVE"):
@@ -290,32 +273,19 @@ def wrapper_page():
                 else:
                     st.write(f"Hentet data for {year}")
                 list_of_years.append(year_data)
-            st.write("done! let it snow")
+            st.write("Ferdig. La det snø!")
 
         st.snow()
         image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name} {coords}")
-        # st.write(image.result_image)
         st.image(image.result_image, output_format="PNG")
 
-def write_trees(years=list):
-
-
-    years_list = years
-    for year_data in years_list:
-        year = year_data.date.year
-        condition = year_data.snow_level()
-        depth = year_data.sd #cm
-
-        st.write(year,condition.value,depth)
-
-
-    image = image_generation(years_list,"TEST", "VIRKELIG")
-
-    st.image(image.result_image)
-
-
-
-
+def more_info():
+    '''
+    just writes some more info
+    :return:
+    '''
+    st.expander("Les mer om prosjektet", expanded=False)
+    st.markdown("Løsningen baserer seg på Kartverket sitt Stedsnvan API og NVE sitt GridTimeSeries data (GTS) API. Sistnevnte gir beregnet snødybde, nysnø og alt annet funnet i www.xgeo.no",unsafe_allow_html=True)
 
 if __name__ == "__main__":
     wrapper_page()
