@@ -40,6 +40,8 @@ class image_generation:
 
         info = self.images["INFO"]
         info = str(info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen"))
+
+        url = self.images["URL"]
         # generate image:
         self.result_image = self._create_svg_grid_str(svg_list,top,info,images_per_row=7)
 
@@ -47,6 +49,7 @@ class image_generation:
         filenames = [
             "INFO",
             "TOP",
+            "URL",
             "SNOW_LEVEL_ERROR",
             "SNOW_LEVEL_NONE",
             "SNOW_LEVEL_TRACE",
@@ -102,7 +105,7 @@ class image_generation:
         return return_svg
 
 
-    def _create_svg_grid_str(self, svg_strings, top_svg_string, info_svg_string, images_per_row=10):
+    def _create_svg_grid_str(self, svg_strings, top_svg_string, info_svg_string, url_svg_string, images_per_row=10):
 
         if svg_strings == []:
             return ""
@@ -120,6 +123,7 @@ class image_generation:
         # Parse additional SVG elements for the top and info areas
         top_svg = fromstring(top_svg_string)
         info_svg = fromstring(info_svg_string)
+        url_svg = fromstring(url_svg_string)
 
         # Calculate new canvas width and height based on image per row and number of rows needed
         output_width = svg_width * images_per_row
@@ -139,21 +143,13 @@ class image_generation:
         info_svg.set('x', str(output_width - float(info_svg.get('width', '100'))))
         info_svg.set('y', str(output_height - float(info_svg.get('height', '50'))))
 
-        # Draw border around the entire grid
-        border_width=5
-        # border_rect = SubElement(output_svg, "rect", {
-        #     "x": str(border_width / 2),
-        #     "y": str(border_width / 2 + top_height),
-        #     "width": str(output_width),
-        #     "height": str(output_height),
-        #     "fill": "none",
-        #     "stroke": "black",
-        #     "stroke-width": str(border_width)
-        # })
+        # Set url_svg position at the bottom right of the grid
+        url_svg.set('x', "0")
+        url_svg.set('y', str(output_height - float(info_svg.get('height', '50'))))
 
-        # Create alternating background rectangles
-        # colors = ["#D1EBE1"]
-        # for i in range(2):
+        # Generate border
+        border_width=5
+
         background_rect = SubElement(output_svg, "rect", {
             "x": str(border_width),
             "y": str(border_width),
@@ -189,6 +185,7 @@ class image_generation:
 
         # Append the info SVG element last so it renders on top of other elements (if there are overlapping issues)
         output_svg.append(info_svg)
+        output_svg.append(url_svg)
 
         # Convert output SVG element tree back to a string and return it
         return tostring(output_svg, encoding='unicode')
