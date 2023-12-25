@@ -184,7 +184,7 @@ def create_svg_grid_test():
     # return_string = create_svg_grid_str(list_of_strings,images_per_row=7)
     top = top.replace("TITLE_TEXT", "Oslo").replace("SUB_TEXT", "Lokasjon bla bla bla")
     info = info.replace("INFO_TEXT", "Laget av Andreas Lorentzen")
-    return_string = create_svg_grid_str_v2(list_of_strings, images_per_row=4,top_svg_string=top, info_svg_string=info)
+    return_string = create_svg_grid_str_v2(list_of_strings, images_per_row=7,top_svg_string=top, info_svg_string=info)
 
     return return_string
 
