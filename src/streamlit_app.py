@@ -134,7 +134,7 @@ def get_place_name(lat,long):
     if response.status_code == 200:
         try:
             data = response.json()["navn"][0]
-            st.write(data)
+            st.write(response.json())
             return (data["stedsnavn"][0]["skrivemåte"], data["meterFraPunkt"])
         except:
             return ("Stedsnavn ikke funnet.", "")
