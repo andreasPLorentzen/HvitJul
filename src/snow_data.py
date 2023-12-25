@@ -24,6 +24,7 @@ class SnowData:
 
 
     def snow_level(self) -> bool:
+        if not self.success: return SnowLevel.ERROR
         if self.sd > 100: return SnowLevel.SEVERE
         if self.sd > 50: return SnowLevel.HEAVY
         if self.sd > 7: return SnowLevel.MODERATE
