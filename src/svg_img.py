@@ -86,8 +86,8 @@ class image_generation:
 
         if year is not None:
             st.write("what?")
-            st.write(return_svg.replace("YEAR_TEXT", year))
-            return_svg.replace("YEAR_TEXT", year)
+            st.write(return_svg.replace("YEAR_TEXT", str(year)))
+            return_svg.replace("YEAR_TEXT", str(year))
 
         if year is not None:
             return_svg.replace("SNOW_DEPTH_TEXT", snow_depth)
