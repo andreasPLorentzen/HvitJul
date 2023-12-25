@@ -125,7 +125,7 @@ def get_place_name(lat,long):
         "radius": 5000,
         "fuzzy": "true",
         "utkoordsys": "4258",
-        "treffPerSide": "5",
+        "treffPerSide": "10",
         "side": "1"
     }
 
@@ -133,9 +133,16 @@ def get_place_name(lat,long):
 
     if response.status_code == 200:
         try:
-            data = response.json()["navn"][0]
+            data = response.json()["navn"]
+            closest_name = data[0]
+
+            for name_obj in data:
+                if name_obj["meterFraPunkt"] < closest_name["meterFraPunkt"]:
+                    closest_name = name_obj
+
+
             st.write(response.json())
-            return (data["stedsnavn"][0]["skrivemåte"], data["meterFraPunkt"])
+            return (closest_name["stedsnavn"][0]["skrivemåte"], closest_name["meterFraPunkt"])
         except:
             return ("Stedsnavn ikke funnet.", "")
     else:
