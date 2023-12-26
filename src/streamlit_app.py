@@ -372,7 +372,7 @@ def more_info():
                 "<p>Alt er implementert i Python ved bruk av pakken streamlit. Bruker du Python, så anbefaler vi å prøve den ut. Det er derimot noen svakheter med systemet. Spesielt en vi ikke har klart å løse med en treg markør i kartet. Hvis du vil titte på kildekoden ligger den tilgjengelig på GitHub.</p>"
                 "<p>Hvis du ønsker å ta kontakt, gjør det gjerne gjennom LinkedIn.</p>"
                 "<p>Andreas: <a href='https://www.linkedin.com/in/andreas-p-lorentzen/'>https://www.linkedin.com/in/andreas-p-lorentzen</a></p>"
-                "<p>Johannes: <a https://www.linkedin.com/in/pippidis/'>https://www.linkedin.com/in/pippidis</a></p>"
+                "<p>Johannes: <a href='https://www.linkedin.com/in/pippidis/'>https://www.linkedin.com/in/pippidis</a></p>"
                 "<p>God jul<br>PS: Hvis du er en grafisk designer og vil gjøre grafikken enda bedre, så si ifra :)</p>",
                 unsafe_allow_html=True)
 
