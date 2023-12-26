@@ -6,7 +6,7 @@ import pandas as pd
 from streamlit_folium import st_folium
 from src.gts_api import GridTimeSeriesAPI
 from src.svg_img import image_generation
-from src.arcgis_online_reporting import add_point_to_feature_layer
+from src.arcgis_online_functions import add_point_to_feature_layer, get_number_of_responses
 from src.stedsnavn_api import get_place_name_as_markdown
 
 # MAP settings
@@ -162,6 +162,8 @@ def more_info():
                 "<p>Johannes: <a href='https://www.linkedin.com/in/pippidis/'>https://www.linkedin.com/in/pippidis</a></p>"
                 "<p>God jul<br>PS: Hvis du er en grafisk designer og vil gjøre grafikken enda bedre, så si ifra :)</p>",
                 unsafe_allow_html=True)
+
+    st.write(f"Hittil er det genrerert {get_number_of_responses()} bilder gjennom denne appen.")
 
 if __name__ == "__main__":
     wrapper_page()
