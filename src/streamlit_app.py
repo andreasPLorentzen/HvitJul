@@ -313,7 +313,7 @@ def main_page():
 
             df = pd.DataFrame(year_data)
 
-
+            st.subheader("I tabulær form:")
             st.dataframe(df, column_config={
                 "name": "Var det snø på juleaften?",
                 "date": st.column_config.DatetimeColumn(
@@ -349,7 +349,7 @@ def main_page():
             bar_df = pd.DataFrame(bar_chart_data)
             # st.write(bar_df)
 
-            st.subheader("Kanskje du også ønsker å se det som et søylediagram?")
+            st.write("Kanskje du også ønsker å se det som et søylediagram?")
             st.bar_chart(bar_df, x="År", y="Snødybde i cm")
 
 def more_info():
