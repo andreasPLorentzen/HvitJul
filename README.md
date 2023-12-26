@@ -2,6 +2,8 @@
 
 Dette systemet svarer på spørsmålet "Var det en hvit jul her tidligere?".
 
+Appen er publisert på https://hvitjul.streamlit.app
+
 **NOTE:** It is only documented in Norwegian as it only works in Norway and is written for use in Norway
 
 ## Om prosjektet
