@@ -306,43 +306,47 @@ def main_page():
         with st.expander(label="Se som tabell",expanded=False):
             # testing some data visualization:
             year_data = []
-            for year_obj in list_of_years:
+            bar_chart_data = []
+        for year_obj in list_of_years:
                 year_data.append(year_obj.as_dict())
+                bar_chart_data.append((year_obj.date.year, year_obj.sd))
 
-            df = pd.DataFrame(year_data)
+        df = pd.DataFrame(year_data)
 
 
-            st.dataframe(df, column_config={
-                "name": "Var det snø på juleaften?",
-                "date": st.column_config.DatetimeColumn(
-                    "År",
-                    format="YYYY",
-                ),
-                "sd": st.column_config.NumberColumn(
-                    "Snødybde",
-                    help="Dybde i cm",
-                ),
-                "tm": None,
-                # "tm": st.column_config.NumberColumn(
-                #     "Temperatur",
-                #     help="Temperatur i grader celsius",
-                # ),
-                "fsw": None,
-                "fsw7d": None,
-                "latitude": None,
-                "longitude": None,
-                "lwc": None,
-                "qsw": None,
-                "sdfsw": None,
-                "success": None,
-                "swe": None,
-                "swechange7d": None,
-                "age": None
+        st.dataframe(df, column_config={
+            "name": "Var det snø på juleaften?",
+            "date": st.column_config.DatetimeColumn(
+                "År",
+                format="YYYY",
+            ),
+            "sd": st.column_config.NumberColumn(
+                "Snødybde",
+                help="Dybde i cm",
+            ),
+            "tm": None,
+            # "tm": st.column_config.NumberColumn(
+            #     "Temperatur",
+            #     help="Temperatur i grader celsius",
+            # ),
+            "fsw": None,
+            "fsw7d": None,
+            "latitude": None,
+            "longitude": None,
+            "lwc": None,
+            "qsw": None,
+            "sdfsw": None,
+            "success": None,
+            "swe": None,
+            "swechange7d": None,
+            "age": None
 
-                },
-            hide_index=True,)
+            },
+        hide_index=True,)
 
-            st.bar_chart(df,x="date", y=["sd"])
+
+
+        st.bar_chart(bar_chart_data)
 
 def more_info():
     '''
