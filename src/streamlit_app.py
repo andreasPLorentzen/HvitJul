@@ -188,7 +188,8 @@ def get_place_name_as_markdown(lat,long) -> str:
     '''
     navn,distance,coords = get_place_name(lat,long)
     # coords = f"{round(coords[1],2)}° øst, {round(coords[0],2)}° nord"
-    coords = f"({round(coords[1], 2)}°Ø,{round(coords[0], 2)}°N)"
+    # coords = f"({round(coords[1], 2)}°Ø, {round(coords[0], 2)}°N)"
+    coords = f"{round(coords[0], 2)}°N, {round(coords[1], 2)}°Ø"
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
          f'<p style="font-size: 1.2em; font-weight: italic; margin-left: 10px; display: inline;">{distance}</p>'\
@@ -294,7 +295,7 @@ def main_page():
             st.write("Ferdig. La det snø!")
 
         st.snow()
-        image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name} {coords}")
+        image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name}, {coords}")
         st.image(image.result_image, output_format="PNG")
         st.markdown(
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",
