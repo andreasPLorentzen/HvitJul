@@ -346,7 +346,8 @@ def main_page():
 
 
         bar_df = pd.DataFrame(bar_chart_data)
-        st.bar_chart(bar_df, ["År", "Snødybde"])
+        st.write(bar_df)
+        st.bar_chart(bar_df, x="År", y="Snødybde")
 
 def more_info():
     '''
