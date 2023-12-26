@@ -303,7 +303,7 @@ def main_page():
             "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? trykk på knappen under: </p>",
             unsafe_allow_html=True)
 
-        with st.button(label="Se som tabell"):
+        with st.expander(label="Se som tabell",expanded=False):
             # testing some data visualization:
             year_data = []
             for year_obj in list_of_years:
