@@ -187,7 +187,8 @@ def get_place_name_as_markdown(lat,long) -> str:
     :return:
     '''
     navn,distance,coords = get_place_name(lat,long)
-    coords = f"{round(coords[1],2)}° øst, {round(coords[0],2)}° nord"
+    # coords = f"{round(coords[1],2)}° øst, {round(coords[0],2)}° nord"
+    coords = f"({round(coords[1], 2)}°Ø,{round(coords[0], 2)}°N)"
 
     html=f'<p style="font-size: 2em; font-weight: bold; margin-right: 10px; display: inline;">{navn}</p>'\
          f'<p style="font-size: 1.2em; font-weight: italic; margin-left: 10px; display: inline;">{distance}</p>'\

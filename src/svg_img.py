@@ -39,7 +39,7 @@ class image_generation:
         top = str(top.replace("TITLE_TEXT", title))
 
         info = self.images["INFO"]
-        info = str(info.replace("INFO_TEXT", "Generert ved bruk av API til Kartverket og NVE, Utviklet av Andreas og Johannes Lorentzen"))
+        info = str(info.replace("INFO_TEXT", "Kilde: NVE og Kartverket, utviklet av Andreas og Johannes Lorentzen"))
 
         url = self.images["URL"]
         # generate image:
