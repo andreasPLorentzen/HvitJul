@@ -300,7 +300,7 @@ def main_page():
         st.image(image.result_image, output_format="PNG")
 
         # reporting back
-        add_point_to_feature_layer(lat, lon, latest_year=this_year, earliest_year=earliest_year)
+        add_point_to_feature_layer(lat, lon, latest_year=this_year, earliest_year=earliest_year, place_name=name)
 
         st.markdown(
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",

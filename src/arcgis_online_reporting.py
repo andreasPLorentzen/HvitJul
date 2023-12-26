@@ -7,7 +7,7 @@ import requests
 import json
 from datetime import datetime
 
-def add_point_to_feature_layer(lat, lon, latest_year, earliest_year):
+def add_point_to_feature_layer(lat, lon, latest_year, earliest_year,place_name):
     # ArcGIS Online feature layer Add Features endpoint
     add_features_url = "https://services6.arcgis.com/XQb5TfenBnLwbfWV/arcgis/rest/services/hvit_jul_response/FeatureServer/0/addFeatures"
 
@@ -19,7 +19,8 @@ def add_point_to_feature_layer(lat, lon, latest_year, earliest_year):
         "attributes": {
             "use_date": datetime.now().isoformat(),
             "latest_year": int(latest_year),
-            "earliest_year": int(earliest_year)
+            "earliest_year": int(earliest_year),
+            "place_name": str(place_name)
         },
         "geometry": {
             "spatialReference": {
