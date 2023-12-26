@@ -6,7 +6,8 @@ Appen er publisert på https://hvitjul.streamlit.app
 
 **NOTE:** It is only documented in Norwegian as it only works in Norway and is written for use in Norway
 
-###Example image
+<h3>Example image</h3>
+
 ![Example image](Graphics/example.png)
 
 ## Om prosjektet
