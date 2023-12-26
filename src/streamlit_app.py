@@ -300,7 +300,7 @@ def main_page():
             unsafe_allow_html=True)
 
         st.markdown(
-            "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? <br> I såfall er det bare å trykk på knappen under: </p>",
+            "<br><br><br><p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? <br> I såfall er det bare å trykk på knappen under: </p>",
             unsafe_allow_html=True)
 
         with st.expander(label="Se som tabell",expanded=False):
@@ -319,10 +319,11 @@ def main_page():
                 "date": st.column_config.DatetimeColumn(
                     "År",
                     format="YYYY",
+                    help="År i runder rundt solen",
                 ),
                 "sd": st.column_config.NumberColumn(
                     "Snødybde",
-                    help="Dybde i cm",
+                    help="Snøybde i cm",
                 ),
                 "tm": None,
                 # "tm": st.column_config.NumberColumn(
