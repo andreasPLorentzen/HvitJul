@@ -322,10 +322,11 @@ def main_page():
                     "Snødybde",
                     help="Dybde i cm",
                 ),
-                "tm": st.column_config.NumberColumn(
-                    "Temperatur",
-                    help="Temperatur i grader celsius",
-                ),
+                "tm": None,
+                # "tm": st.column_config.NumberColumn(
+                #     "Temperatur",
+                #     help="Temperatur i grader celsius",
+                # ),
                 "fsw": None,
                 "fsw7d": None,
                 "latitude": None,
@@ -341,7 +342,7 @@ def main_page():
                 },
             hide_index=True,)
 
-            st.line_chart(df,x="date", y=["sd", "tm"])
+            st.bar_chart(df,x="date", y=["sd"])
 
 def more_info():
     '''
