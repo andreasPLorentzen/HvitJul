@@ -77,5 +77,5 @@ def get_number_of_responses() -> int:
 
 
 if __name__ == "__main__":
-    # print(add_point_to_feature_layer(60,10, 2023, 2011))
+    print(add_point_to_feature_layer(60,10, 2023, 2011))
     print(f"Hittil er det genrerert {get_number_of_responses()} bilder gjennom denne appen.")

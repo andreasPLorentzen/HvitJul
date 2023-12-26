@@ -163,7 +163,7 @@ def more_info():
                 "<p>God jul<br>PS: Hvis du er en grafisk designer og vil gjøre grafikken enda bedre, så si ifra :)</p>",
                 unsafe_allow_html=True)
 
-    st.write(f"Hittil er det genrerert {get_number_of_responses()} bilder gjennom denne appen.")
+    st.write(f"Det er hittil er det genrerert {get_number_of_responses()} oversikter gjennom denne appen.")
 
 if __name__ == "__main__":
     wrapper_page()
