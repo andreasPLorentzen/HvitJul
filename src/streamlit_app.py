@@ -267,7 +267,7 @@ def main_page():
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH, key="new", feature_group_to_add=fg)
 
     earliest_year = st.select_slider("Hvor langt tilbake i tid vil du se?",
-                                     options=[y for y in range(1972, this_year).__reversed__()],
+                                     options=[y for y in range(1950, this_year).__reversed__()],
                                      value=this_year - 14)
 
     if data["last_clicked"] is not None:
