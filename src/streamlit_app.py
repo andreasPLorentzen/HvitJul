@@ -275,11 +275,8 @@ def main_page():
 
     list_of_years = []
     if lat is not None:
-        earliest_year = datetime.date(year=1973,month=1,day=1).year
-        st.write(datetime.date(year=this_year - 14,month=1,day=1))
-        earliest_year = st.slider("Hvor langt tilbake i tid vil du se?", 1973,max_value=this_year-1,value=earliest_year,)
-        earliest_year = st.select_slider("Hvor langt tilbake i tid vil du se?",options=[y for y in range(1972,this_year).__reversed__()],value=this_year - 14)
-        st.write(earliest_year)
+        earliest_year = this_year - 14
+
         with st.status("Henter historiske snøberegninger fra NVE"):
             marker = folium.Marker([lat, lon])
             st.session_state["markers"] = [marker]
@@ -301,7 +298,9 @@ def main_page():
         st.markdown(
             "<p>Vil du gå enda lengere tilbake? Trykk under for å sjekke de siste 50 årene (dette tar litt lengere tid) </p>",
             unsafe_allow_html=True)
-
+        earliest_year = st.select_slider("Hvor langt tilbake i tid vil du se?",
+                                         options=[y for y in range(1972, this_year).__reversed__()],
+                                         value=this_year - 14)
         if st.button("Utvid til 50 år"):
             earliest_year = this_year - 50
             st.write(earliest_year)
