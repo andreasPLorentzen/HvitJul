@@ -262,6 +262,10 @@ def main_page():
     # drawing map
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH, key="new", feature_group_to_add=fg)
 
+    earliest_year = st.select_slider("Hvor langt tilbake i tid vil du se?",
+                                     options=[y for y in range(1972, this_year).__reversed__()],
+                                     value=this_year - 14)
+
     if data["last_clicked"] is not None:
         lat = data["last_clicked"]["lat"]
         lon = data["last_clicked"]["lng"]
@@ -275,8 +279,6 @@ def main_page():
 
     list_of_years = []
     if lat is not None:
-        earliest_year = this_year - 14
-
         with st.status("Henter historiske snøberegninger fra NVE"):
             marker = folium.Marker([lat, lon])
             st.session_state["markers"] = [marker]
@@ -298,9 +300,7 @@ def main_page():
         st.markdown(
             "<p>Vil du gå enda lengere tilbake? Trykk under for å sjekke de siste 50 årene (dette tar litt lengere tid) </p>",
             unsafe_allow_html=True)
-        earliest_year = st.select_slider("Hvor langt tilbake i tid vil du se?",
-                                         options=[y for y in range(1972, this_year).__reversed__()],
-                                         value=this_year - 14)
+
         if st.button("Utvid til 50 år"):
             earliest_year = this_year - 50
             st.write(earliest_year)
