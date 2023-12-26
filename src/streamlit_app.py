@@ -300,11 +300,12 @@ def main_page():
             unsafe_allow_html=True)
 
 
-    # testing som data:
+    # testing some data visualization:
     year_data = []
     for year_obj in list_of_years:
         year_data.append(year_obj.as_dict())
 
+    st.write(list_of_years[0])
     df = pd.DataFrame(year_data)
 
     st.write(df)
