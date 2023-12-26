@@ -298,7 +298,10 @@ def main_page():
         st.snow()
         image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name}, {coords}")
         st.image(image.result_image, output_format="PNG")
-        st.write(add_point_to_feature_layer(lat, lon))
+
+        # reporting back
+        add_point_to_feature_layer(lat, lon, latest_year=this_year, earliest_year=earliest_year)
+
         st.markdown(
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",
             unsafe_allow_html=True)
