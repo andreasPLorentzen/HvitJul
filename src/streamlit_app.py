@@ -310,6 +310,8 @@ def main_page():
 
     st.write(df)
 
+    st.line_chart(df,x="date", y=["sd", "tm"])
+
 def more_info():
     '''
     just writes some more info
