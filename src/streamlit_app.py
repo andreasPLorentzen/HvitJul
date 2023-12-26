@@ -36,7 +36,10 @@ def main_page():
     st.markdown(
         "<p>Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å diskutere på hvor ofte det egentlig var en hvit jul i Oslo? eller Bergen?</p>"
         "<p>Vi ble ikke helt enige og siden vi strengt talt ikke hadde bedre ting å gjøre mellom turer på ski og julemat, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.</p>"
-        "<p>Når du trykker i kartet, starter applikasjonen å hente data om snøforhold fra NVE og sjekker hvordan var snøforholdene akkurat der. Du kan selv velge hvor langt tilbake i tid du ønsker å se ved å bruke skyveknappen nedenfor, men vi anbefaler å starte med kun 14 år, da det tar litt tid å hente inn data.</p>", unsafe_allow_html=True)
+        "<p>Når du trykker i kartet, starter applikasjonen å hente data om snøforhold fra NVE og sjekker hvordan var snøforholdene akkurat der. Du kan selv velge hvor langt tilbake i tid du ønsker å se ved å bruke skyveknappen nedenfor, men vi anbefaler å starte med kun 14 år, da det tar litt tid å hente inn data.</p>"
+        f"<p>Denne appen har hittil svart på {get_number_of_responses()} spørsmål.</p>", unsafe_allow_html=True)
+
+
     st.subheader("Trykk i kartet for å se hvor mye snø det har vært i jula")
 
     # setting state
@@ -163,7 +166,7 @@ def more_info():
                 "<p>God jul<br>PS: Hvis du er en grafisk designer og vil gjøre grafikken enda bedre, så si ifra :)</p>",
                 unsafe_allow_html=True)
 
-    st.write(f"Det er hittil er det genrerert {get_number_of_responses()} oversikter gjennom denne appen.")
+
 
 if __name__ == "__main__":
     wrapper_page()
