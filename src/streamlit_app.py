@@ -7,6 +7,7 @@ from streamlit_folium import st_folium
 from src.gts_api import GridTimeSeriesAPI
 from src.svg_img import image_generation
 import requests
+import pandas as pd
 
 # MAP settings
 INPUT_MAP_CENTER = [60.0, 10.0]
@@ -244,7 +245,7 @@ def main_page():
     st.markdown(
         "<p>Etter vi så en grafikk som viste om det var en hvit jul i New York, begynte vi å diskutere på hvor ofte det egentlig var en hvit jul i Oslo? eller Bergen? Vi ble ikke helt enige og siden vi strengt talt ikke hadde bedre ting å gjøre mellom turer på ski og julemat, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.</p>"
         "<p>Siden vi strengt talt hadde bedre ting å gjøre, så lagde vi denne websiden som lar deg velge et sted i Norge og få svaret selv.</p>"
-        "<p>Når du trykker i kartet, starter applikasjonen å hente data om snøforhold fra NVE og sjekker hvordan var snøforholdene akkurat der.</p>", unsafe_allow_html=True)
+        "<p>Når du trykker i kartet, starter applikasjonen å hente data om snøforhold fra NVE og sjekker hvordan var snøforholdene akkurat der. Du kan selv velge hvor langt tilbake i tid du ønsker å se ved å bruke skyveknappen nedenfor, men vi anbefaler å starte med kun 14 år, da det tar litt tid å hente inn data.</p>", unsafe_allow_html=True)
     st.subheader("Trykk i kartet for å se hvor mye snø det har vært i jula")
 
     # setting state
@@ -297,14 +298,16 @@ def main_page():
         st.markdown(
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",
             unsafe_allow_html=True)
-        st.markdown(
-            "<p>Vil du gå enda lengere tilbake? Trykk under for å sjekke de siste 50 årene (dette tar litt lengere tid) </p>",
-            unsafe_allow_html=True)
 
-        if st.button("Utvid til 50 år"):
-            earliest_year = this_year - 50
-            st.write(earliest_year)
 
+    # testing som data:
+    year_data = []
+    for year_obj in list_of_years:
+        year_data.append(year_obj.as_dict())
+
+    df = pd.DataFrame(year_data)
+
+    st.write(df)
 
 def more_info():
     '''
