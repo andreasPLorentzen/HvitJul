@@ -6,6 +6,7 @@ from folium.plugins import Draw
 from streamlit_folium import st_folium
 from src.gts_api import GridTimeSeriesAPI
 from src.svg_img import image_generation
+from src.arcgis_online_reporting import add_point_to_feature_layer
 import requests
 import pandas as pd
 
@@ -297,6 +298,7 @@ def main_page():
         st.snow()
         image = image_generation(list_of_years, "Var det snø på juleaften?", f"{name}, {coords}")
         st.image(image.result_image, output_format="PNG")
+        st.write(add_point_to_feature_layer(lat, lon))
         st.markdown(
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",
             unsafe_allow_html=True)
