@@ -308,7 +308,23 @@ def main_page():
     st.write(list_of_years[0])
     df = pd.DataFrame(year_data)
 
-    st.write(df)
+
+    st.dataframe(df, column_config={
+        "name": "Var det snø på juleaften?",
+        "date": st.column_config.DatetimeColumn(
+            "År",
+            format="YYYY",
+        ),
+        "sd": st.column_config.NumberColumn(
+            "Snødybde",
+            help="Dybde i cm",
+        ),
+        "tm": st.column_config.NumberColumn(
+            "Temperatur",
+            help="Dybde i cm",
+        ),
+        },
+    hide_index=True,
 
     st.line_chart(df,x="date", y=["sd", "tm"])
 
