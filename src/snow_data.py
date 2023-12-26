@@ -25,7 +25,7 @@ class SnowData:
         if not self.success: return SnowLevel.ERROR
         if self.sd > 80: return SnowLevel.SEVERE
         if self.sd > 40: return SnowLevel.HEAVY
-        if self.sd > 15: return SnowLevel.MODERATE
+        if self.sd > 14: return SnowLevel.MODERATE
         if self.sd > 2: return SnowLevel.LIGHT
         if self.sd > 0.2: return SnowLevel.TRACE
         return SnowLevel.NONE
