@@ -309,7 +309,7 @@ def main_page():
             bar_chart_data = []
         for year_obj in list_of_years:
                 year_data.append(year_obj.as_dict())
-                bar_chart_data.append({"År":year_obj.date.year, "Snødybde":year_obj.sd})
+                bar_chart_data.append({"År":year_obj.date.year, "Snødybde i cm":year_obj.sd})
 
         df = pd.DataFrame(year_data)
 
@@ -342,12 +342,12 @@ def main_page():
             "age": None
 
             },
-        hide_index=True,)
+        hide_index=True,width=400)
 
 
         bar_df = pd.DataFrame(bar_chart_data)
-        st.write(bar_df)
-        st.bar_chart(bar_df, x="År", y="Snødybde")
+        # st.write(bar_df)
+        st.bar_chart(bar_df, x="År", y="Snødybde i cm")
 
 def more_info():
     '''
