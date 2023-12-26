@@ -299,45 +299,50 @@ def main_page():
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",
             unsafe_allow_html=True)
 
+        st.markdown(
+            "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? trykk på knappen under </p>",
+            unsafe_allow_html=True)
 
-    # testing some data visualization:
-    year_data = []
-    for year_obj in list_of_years:
-        year_data.append(year_obj.as_dict())
+        if st.button(label="Se som tabell"):
+            # testing some data visualization:
+            year_data = []
+            for year_obj in list_of_years:
+                year_data.append(year_obj.as_dict())
 
-    st.write(list_of_years[0])
-    df = pd.DataFrame(year_data)
+            st.write(list_of_years[0])
+            df = pd.DataFrame(year_data)
 
 
-    st.dataframe(df, column_config={
-        "name": "Var det snø på juleaften?",
-        "date": st.column_config.DatetimeColumn(
-            "År",
-            format="YYYY",
-        ),
-        "sd": st.column_config.NumberColumn(
-            "Snødybde",
-            help="Dybde i cm",
-        ),
-        "tm": st.column_config.NumberColumn(
-            "Temperatur",
-            help="Temperatur i grader celsius",
-        ),
-        "fsw": None,
-        "fsw7d": None,
-        "latitude": None,
-        "longitude": None,
-        "lwc": None,
-        "qsw": None,
-        "sdfsw": None,
-        "success": None,
-        "swe": None,
-        "swechange7d": None,
+            st.dataframe(df, column_config={
+                "name": "Var det snø på juleaften?",
+                "date": st.column_config.DatetimeColumn(
+                    "År",
+                    format="YYYY",
+                ),
+                "sd": st.column_config.NumberColumn(
+                    "Snødybde",
+                    help="Dybde i cm",
+                ),
+                "tm": st.column_config.NumberColumn(
+                    "Temperatur",
+                    help="Temperatur i grader celsius",
+                ),
+                "fsw": None,
+                "fsw7d": None,
+                "latitude": None,
+                "longitude": None,
+                "lwc": None,
+                "qsw": None,
+                "sdfsw": None,
+                "success": None,
+                "swe": None,
+                "swechange7d": None,
+                "age": None
 
-        },
-    hide_index=True,)
+                },
+            hide_index=True,)
 
-    st.line_chart(df,x="date", y=["sd", "tm"])
+            st.line_chart(df,x="date", y=["sd", "tm"])
 
 def more_info():
     '''
