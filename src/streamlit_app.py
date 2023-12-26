@@ -321,8 +321,19 @@ def main_page():
         ),
         "tm": st.column_config.NumberColumn(
             "Temperatur",
-            help="Dybde i cm",
+            help="Temperatur i grader celsius",
         ),
+        "fsw": None,
+        "fsw7d": None,
+        "latitude": None,
+        "longitude": None,
+        "lwc": None,
+        "qsw": None,
+        "sdfsw": None,
+        "success": None,
+        "swe": None,
+        "swechange7d": None,
+
         },
     hide_index=True,)
 
