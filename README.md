@@ -6,6 +6,9 @@ Appen er publisert på https://hvitjul.streamlit.app
 
 **NOTE:** It is only documented in Norwegian as it only works in Norway and is written for use in Norway
 
+###Example image
+![Example image](Graphics/example.png)
+
 ## Om prosjektet
 Denne løsningen var et hobbyprosjekt i jula 2023 av Andreas P. Lorentzen og Johannes P. Lorentzen som startet i en diskusjon og endte med implementasjon. Vi håper at du og dere liker løsningen, og at det kanskje hjelper med å løse en diskusjon hos dere også.
 
