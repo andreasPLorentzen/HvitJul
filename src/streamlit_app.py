@@ -300,16 +300,15 @@ def main_page():
             unsafe_allow_html=True)
 
         st.markdown(
-            "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? trykk på knappen under </p>",
+            "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? trykk på knappen under: </p>",
             unsafe_allow_html=True)
 
-        if st.button(label="Se som tabell"):
+        with st.button(label="Se som tabell"):
             # testing some data visualization:
             year_data = []
             for year_obj in list_of_years:
                 year_data.append(year_obj.as_dict())
 
-            st.write(list_of_years[0])
             df = pd.DataFrame(year_data)
 
 
