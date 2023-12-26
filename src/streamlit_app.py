@@ -324,7 +324,7 @@ def main_page():
             help="Dybde i cm",
         ),
         },
-    hide_index=True,
+    hide_index=True,)
 
     st.line_chart(df,x="date", y=["sd", "tm"])
 
