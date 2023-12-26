@@ -28,8 +28,6 @@ class APIError(Exception):
     def __str__(self):
         return "APIError: status={}".format(self.status)
 
-
-
 class GridTimeSeriesAPI:
     '''Contains functionality to ask the GTS API
         See: https://api.nve.no/doc/gridtimeseries-data-gts
@@ -63,7 +61,6 @@ class GridTimeSeriesAPI:
         years = range(year_start, year_end+1)
         wds = [GridTimeSeriesAPI.get_snow_info(lat=lat, lon=lon, year=x, month=month, day=day) for x in years]
         return wds
-
 
 
 if __name__=='__main__':

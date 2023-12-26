@@ -1,7 +1,5 @@
-from .snow_data import SnowData
 from .snow_level import SnowLevel
 import streamlit as st
-
 
 from xml.etree.ElementTree import Element, fromstring, tostring, SubElement
 

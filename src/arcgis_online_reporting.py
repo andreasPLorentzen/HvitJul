@@ -4,7 +4,6 @@ Only to run statistics.
 '''
 
 import requests
-import json
 from datetime import datetime
 
 def add_point_to_feature_layer(lat, lon, latest_year, earliest_year,place_name):
@@ -47,7 +46,6 @@ def add_point_to_feature_layer(lat, lon, latest_year, earliest_year,place_name):
         return response.json()
     else:
         return response.text
-
 
 
 if __name__ == "__main__":
