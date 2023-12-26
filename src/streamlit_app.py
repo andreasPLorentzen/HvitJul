@@ -300,54 +300,57 @@ def main_page():
             unsafe_allow_html=True)
 
         st.markdown(
-            "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? trykk på knappen under: </p>",
+            "<p>Vil du heller se det som en tabell? Kanskje laste ned dataen som en CSV? <br> I såfall er det bare å trykk på knappen under: </p>",
             unsafe_allow_html=True)
 
         with st.expander(label="Se som tabell",expanded=False):
             # testing some data visualization:
             year_data = []
             bar_chart_data = []
-        for year_obj in list_of_years:
-                year_data.append(year_obj.as_dict())
-                bar_chart_data.append({"År":year_obj.date.year, "Snødybde i cm":year_obj.sd})
+            for year_obj in list_of_years:
+                    year_data.append(year_obj.as_dict())
+                    bar_chart_data.append({"År":year_obj.date.year, "Snødybde i cm":year_obj.sd})
 
-        df = pd.DataFrame(year_data)
-
-
-        st.dataframe(df, column_config={
-            "name": "Var det snø på juleaften?",
-            "date": st.column_config.DatetimeColumn(
-                "År",
-                format="YYYY",
-            ),
-            "sd": st.column_config.NumberColumn(
-                "Snødybde",
-                help="Dybde i cm",
-            ),
-            "tm": None,
-            # "tm": st.column_config.NumberColumn(
-            #     "Temperatur",
-            #     help="Temperatur i grader celsius",
-            # ),
-            "fsw": None,
-            "fsw7d": None,
-            "latitude": None,
-            "longitude": None,
-            "lwc": None,
-            "qsw": None,
-            "sdfsw": None,
-            "success": None,
-            "swe": None,
-            "swechange7d": None,
-            "age": None
-
-            },
-        hide_index=True,width=400)
+            df = pd.DataFrame(year_data)
 
 
-        bar_df = pd.DataFrame(bar_chart_data)
-        # st.write(bar_df)
-        st.bar_chart(bar_df, x="År", y="Snødybde i cm")
+            st.dataframe(df, column_config={
+                "name": "Var det snø på juleaften?",
+                "date": st.column_config.DatetimeColumn(
+                    "År",
+                    format="YYYY",
+                ),
+                "sd": st.column_config.NumberColumn(
+                    "Snødybde",
+                    help="Dybde i cm",
+                ),
+                "tm": None,
+                # "tm": st.column_config.NumberColumn(
+                #     "Temperatur",
+                #     help="Temperatur i grader celsius",
+                # ),
+                "fsw": None,
+                "fsw7d": None,
+                "latitude": None,
+                "longitude": None,
+                "lwc": None,
+                "qsw": None,
+                "sdfsw": None,
+                "success": None,
+                "swe": None,
+                "swechange7d": None,
+                "age": None
+
+                },
+            hide_index=True, use_container_width=True)
+
+
+
+            bar_df = pd.DataFrame(bar_chart_data)
+            # st.write(bar_df)
+
+            st.subheader("Kanskje du også ønsker å se det som et søylediagram?")
+            st.bar_chart(bar_df, x="År", y="Snødybde i cm")
 
 def more_info():
     '''
