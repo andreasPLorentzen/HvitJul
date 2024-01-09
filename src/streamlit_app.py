@@ -30,7 +30,11 @@ def main_page():
     lon = None
 
     # defining years to show from default
-    this_year = int(datetime.datetime.now().year) + 1
+    now = datetime.datetime.now()
+    if now.month > 11 and now.day > 23: 
+        max_year = int(now.year) + 1 # We include this year if it is at xmas or later
+    else:
+        max_year = int(now.year) # If it is before xmas, then we do not include this year
 
 
     st.markdown(
@@ -58,8 +62,8 @@ def main_page():
     data = st_folium(m, height=INPUT_MAP_HEIGHT, width=INPUT_MAP_WIDTH, key="new", feature_group_to_add=fg)
 
     earliest_year = st.select_slider("Hvor langt tilbake i tid vil du se?",
-                                     options=[y for y in range(1957, this_year).__reversed__()],
-                                     value=this_year - 14)
+                                     options=[y for y in range(1957, max_year).__reversed__()],
+                                     value=max_year - 14)
 
     if data["last_clicked"] is not None:
         lat = data["last_clicked"]["lat"]
@@ -77,7 +81,7 @@ def main_page():
         with st.status("Henter historiske snøberegninger fra NVE"):
             marker = folium.Marker([lat, lon])
             st.session_state["markers"] = [marker]
-            for year in range(earliest_year, this_year).__reversed__():
+            for year in range(earliest_year, max_year).__reversed__():
                 year_data = GridTimeSeriesAPI.get_snow_info(lat, lon, year)
                 if year_data.success == False:
                     st.write(f"Feil med data for {year}")
@@ -91,7 +95,7 @@ def main_page():
         st.image(image.result_image, output_format="PNG")
 
         # reporting back
-        add_point_to_feature_layer(lat, lon, latest_year=this_year, earliest_year=earliest_year, place_name=name)
+        add_point_to_feature_layer(lat, lon, latest_year=max_year, earliest_year=earliest_year, place_name=name)
 
         st.markdown(
             "<p>Den enkleste måten å dele bildet over er å høyreklikke og kopiere og lime det inn i Facebook, Twitter, eller kanskje i en presentasjon på jobben for å avslutte en diskusjon dere har? </p>",
