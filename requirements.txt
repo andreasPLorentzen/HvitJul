@@ -5,5 +5,4 @@ pandas
 pyproj
 requests
 dataclasses
-json
 statistics
