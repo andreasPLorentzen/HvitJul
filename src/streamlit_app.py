@@ -51,7 +51,7 @@ def main_page():
         st.session_state["markers"] = []
 
     # defining map
-    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False, )
+    m = folium.Map(location=INPUT_MAP_CENTER, zoom_start=INPUT_MAP_ZOOM, export=False)
     fg = folium.FeatureGroup(name="Markers")
 
     # adding markers
