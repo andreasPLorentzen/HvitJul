@@ -1,5 +1,5 @@
-streamlit
-streamlit_folium
+streamlit==1.29.0
+streamlit_folium=0.17.4
 folium
 pandas
 pyproj
